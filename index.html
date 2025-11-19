@@ -1245,15 +1245,15 @@ const gallery = document.querySelector(".gallery");
 const fallbackArtworks = [
     {
         title: "Test Œuvre 1",
-        description: "Description de test 1",
-        image: "https://via.placeholder.com/300x200?text=Artwork+1",
-        status: "disponible"
+        description: "Description test 1",
+        status: "disponible",
+        image: "https://via.placeholder.com/300x200.png?text=Artwork+1"
     },
     {
         title: "Test Œuvre 2",
-        description: "Description de test 2",
-        image: "https://via.placeholder.com/300x200?text=Artwork+2",
-        status: "indisponible"
+        description: "Description test 2",
+        status: "indisponible",
+        image: "https://via.placeholder.com/300x200.png?text=Artwork+2"
     }
 ];
 
@@ -1266,12 +1266,11 @@ async function loadArtworks() {
     try {
         const response = await databases.listDocuments(databaseId, collectionId);
 
-        // Debug : voir exactement ce que retourne Appwrite
         console.log("Réponse Appwrite brute :", response);
 
         artworks = response.documents;
 
-        if (!artworks || artworks.length === 0) {
+        if (!Array.isArray(artworks) || artworks.length === 0) {
             console.warn("Aucune donnée Appwrite. Utilisation des données fallback.");
             artworks = fallbackArtworks;
         }
@@ -1291,12 +1290,12 @@ function renderGallery(artworks) {
     gallery.innerHTML = "";
 
     artworks.forEach(art => {
-        if (!art) return; // sécurité si document undefined
+        if (!art) return;
 
         const status = art.status || "indisponible";
         const title = art.title || "Titre manquant";
         const description = art.description || "";
-        const image = art.image || "https://via.placeholder.com/300x200?text=No+Image";
+        const image = art.image || "https://via.placeholder.com/300x200.png?text=No+Image";
 
         const statusClass = status === "disponible" ? "disponible" : "indisponible";
         const badgeText = status === "disponible" ? "Disponible" : "Indisponible";
