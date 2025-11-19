@@ -1464,98 +1464,96 @@ buttons.forEach(btn => {
 <script type="module">
 import { Client, Databases } from "https://cdn.jsdelivr.net/npm/appwrite@13.0.0/+esm";
 
-// --- CONFIG APPWRITE ---
+/* ----------------------------------------
+   CONFIGURATION APPWRITE
+-----------------------------------------*/
 const client = new Client()
-    .setEndpoint("https://fra.cloud.appwrite.io/v1") 
-    .setProject("691b5a7b002d3cfb0229"); // Ton Project ID
+    .setEndpoint("https://fra.cloud.appwrite.io/v1")
+    .setProject("691b5a7b002d3cfb0229");
 
 const databases = new Databases(client);
 
-// --- IDS ---
-const databaseId = "691caf610036e05d6d49"; // Ton Database ID
-const collectionId = "artwork"; // Ton Collection ID
+const databaseId = "691caf610036e05d6d49";
+const collectionId = "artwork";
 
+/* ----------------------------------------
+   ELEMENT PRINCIPAL
+-----------------------------------------*/
 const gallery = document.querySelector(".gallery");
 
-// --- Exemple de test si Appwrite ne renvoie rien ---
-const testArtworks = [
+/* ----------------------------------------
+   DONNÉES DE SECOURS SI APPWRITE BUG
+-----------------------------------------*/
+const fallbackArtworks = [
     {
         title: "Test Œuvre 1",
-        description: "Description de l'œuvre 1",
-        image: "https://via.placeholder.com/300x200.png?text=Artwork+1",
+        description: "Description de test 1",
+        image: "https://via.placeholder.com/300x200?text=Artwork+1",
         status: "disponible"
     },
     {
         title: "Test Œuvre 2",
-        description: "Description de l'œuvre 2",
-        image: "https://via.placeholder.com/300x200.png?text=Artwork+2",
+        description: "Description de test 2",
+        image: "https://via.placeholder.com/300x200?text=Artwork+2",
         status: "indisponible"
     }
 ];
 
-// --- Charger les œuvres depuis Appwrite ---
+/* ----------------------------------------
+   CHARGER LES ŒUVRES DE LA BASE
+-----------------------------------------*/
 async function loadArtworks() {
+    let artworks = [];
+
     try {
         const response = await databases.listDocuments(databaseId, collectionId);
-        let artworks = response.documents;
+        artworks = response.documents;
 
-        // Si pas de données Appwrite, on utilise le test
         if (!artworks || artworks.length === 0) {
-            console.warn("Aucune donnée Appwrite trouvée, affichage des tests.");
-            artworks = testArtworks;
+            console.warn("Appwrite n’a retourné aucune donnée. Utilisation des données tests.");
+            artworks = fallbackArtworks;
         }
-
-        console.log("Artworks :", artworks); // Debug
-
-        gallery.innerHTML = ""; // Reset
-
-        artworks.forEach(art => {
-            const statusClass = art.status === "disponible" ? "disponible" : "indisponible";
-            const statusLabel = art.status === "disponible" ? "Disponible" : "Indisponible";
-
-            const artworkHTML = `
-                <div class="artwork fade-in" data-status="${art.status}">
-                    <span class="status-badge ${statusClass}">${statusLabel}</span>
-                    <div class="artwork-image">
-                        <img src="${art.image}" alt="${art.title}">
-                    </div>
-                    <div class="artwork-content">
-                        <h3 class="artwork-title">${art.title}</h3>
-                        <p class="artwork-description">${art.description}</p>
-                    </div>
-                </div>
-            `;
-            gallery.innerHTML += artworkHTML;
-        });
-
-        setupFilters(); // Recharge les filtres après génération
-    } catch (err) {
-        console.error("Erreur Appwrite :", err);
-        // Affiche les données test si erreur
-        gallery.innerHTML = "";
-        testArtworks.forEach(art => {
-            const statusClass = art.status === "disponible" ? "disponible" : "indisponible";
-            const statusLabel = art.status === "disponible" ? "Disponible" : "Indisponible";
-
-            const artworkHTML = `
-                <div class="artwork fade-in" data-status="${art.status}">
-                    <span class="status-badge ${statusClass}">${statusLabel}</span>
-                    <div class="artwork-image">
-                        <img src="${art.image}" alt="${art.title}">
-                    </div>
-                    <div class="artwork-content">
-                        <h3 class="artwork-title">${art.title}</h3>
-                        <p class="artwork-description">${art.description}</p>
-                    </div>
-                </div>
-            `;
-            gallery.innerHTML += artworkHTML;
-        });
-        setupFilters();
+    } catch (error) {
+        console.error("Erreur Appwrite :", error);
+        artworks = fallbackArtworks;
     }
+
+    renderGallery(artworks);
+    setupFilters();
 }
 
-// --- FILTRES ---
+/* ----------------------------------------
+   AFFICHAGE DES CARTES DANS LA GALERIE
+-----------------------------------------*/
+function renderGallery(artworks) {
+    gallery.innerHTML = "";
+
+    artworks.forEach(art => {
+        const statusClass = art.status === "disponible" ? "disponible" : "indisponible";
+        const badgeText = art.status === "disponible" ? "Disponible" : "Indisponible";
+
+        const html = `
+        <div class="artwork fade-in" data-status="${art.status}">
+            <span class="status-badge ${statusClass}">${badgeText}</span>
+
+            <div class="artwork-image">
+                <img src="${art.image}" alt="${art.title}">
+            </div>
+
+            <div class="artwork-content">
+                <h3 class="artwork-title">${art.title}</h3>
+                <p class="artwork-description">${art.description}</p>
+            </div>
+        </div>
+        `;
+
+        gallery.innerHTML += html;
+    });
+}
+
+/* ----------------------------------------
+   SYSTÈME DE FILTRES
+-----------------------------------------*/
 function setupFilters() {
     const buttons = document.querySelectorAll(".filter-btn");
     const artworks = document.querySelectorAll(".artwork");
@@ -1572,7 +1570,7 @@ function setupFilters() {
 
                 if (filter === "all" || filter === status) {
                     art.classList.remove("hidden");
-                    setTimeout(() => { art.style.display = "block"; }, 10);
+                    art.style.display = "block";
                 } else {
                     art.classList.add("hidden");
                     setTimeout(() => { art.style.display = "none"; }, 300);
@@ -1582,11 +1580,11 @@ function setupFilters() {
     });
 }
 
-// Charger le portfolio au chargement de la page
+/* ----------------------------------------
+   LANCEMENT
+-----------------------------------------*/
 loadArtworks();
 </script>
-
-
 
 </body>
 </html>
