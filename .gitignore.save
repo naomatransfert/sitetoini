@@ -1,0 +1,8 @@
+.DS_Store
+
+
+git add .
+git commit -m "fix: nettoyage DS_Store"
+git push
+
+
