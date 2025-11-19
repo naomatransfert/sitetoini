@@ -1247,15 +1247,16 @@ const fallbackArtworks = [
         title: "Test Œuvre 1",
         description: "Description test 1",
         status: "disponible",
-        image: "https://via.placeholder.com/300x200.png?text=Artwork+1"
+        image: "" // ou placeholder
     },
     {
         title: "Test Œuvre 2",
         description: "Description test 2",
         status: "indisponible",
-        image: "https://via.placeholder.com/300x200.png?text=Artwork+2"
+        image: "" // ou placeholder
     }
 ];
+
 
 /* ----------------------------------------
    CHARGER LES ŒUVRES DE LA BASE
@@ -1264,24 +1265,28 @@ async function loadArtworks() {
     let artworks = [];
 
     try {
+        // Récupère les documents depuis Appwrite
         const response = await databases.listDocuments(databaseId, collectionId);
-
         console.log("Réponse Appwrite brute :", response);
 
-        artworks = response.documents;
-
-        if (!Array.isArray(artworks) || artworks.length === 0) {
-            console.warn("Aucune donnée Appwrite. Utilisation des données fallback.");
+        // Vérifie si les documents existent
+        if (response && Array.isArray(response.documents) && response.documents.length > 0) {
+            artworks = response.documents;
+        } else {
+            console.warn("Aucune donnée Appwrite trouvée, utilisation du fallback.");
             artworks = fallbackArtworks;
         }
     } catch (error) {
-        console.error("Erreur Appwrite :", error);
+        // En cas d'erreur réseau ou Appwrite, utiliser le fallback
+        console.error("Erreur lors du chargement des œuvres :", error);
         artworks = fallbackArtworks;
     }
 
+    // Rend la galerie et active les filtres
     renderGallery(artworks);
     setupFilters();
 }
+
 
 /* ----------------------------------------
    AFFICHAGE DES CARTES DANS LA GALERIE
