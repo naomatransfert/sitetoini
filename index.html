@@ -1507,6 +1507,7 @@ async function loadArtworks() {
 
     try {
         const response = await databases.listDocuments(databaseId, collectionId);
+        console.log("Réponse Appwrite brute :", response);
         artworks = response.documents;
 
         if (!artworks || artworks.length === 0) {
