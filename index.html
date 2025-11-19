@@ -1219,6 +1219,142 @@ body {
 
 </section>
 
+<script type="module">
+import { Client, Databases } from "https://cdn.jsdelivr.net/npm/appwrite@13.0.0/+esm";
+
+/* ----------------------------------------
+   CONFIGURATION APPWRITE
+-----------------------------------------*/
+const client = new Client()
+    .setEndpoint("https://fra.cloud.appwrite.io/v1")
+    .setProject("691b5a7b002d3cfb0229");
+
+const databases = new Databases(client);
+
+const databaseId = "691caf610036e05d6d49";
+const collectionId = "artwork";
+
+/* ----------------------------------------
+   ELEMENT PRINCIPAL
+-----------------------------------------*/
+const gallery = document.querySelector(".gallery");
+
+/* ----------------------------------------
+   DONNÉES DE SECOURS SI APPWRITE BUG
+-----------------------------------------*/
+const fallbackArtworks = [
+    {
+        title: "Test Œuvre 1",
+        description: "Description de test 1",
+        image: "https://via.placeholder.com/300x200?text=Artwork+1",
+        status: "disponible"
+    },
+    {
+        title: "Test Œuvre 2",
+        description: "Description de test 2",
+        image: "https://via.placeholder.com/300x200?text=Artwork+2",
+        status: "indisponible"
+    }
+];
+
+/* ----------------------------------------
+   CHARGER LES ŒUVRES DE LA BASE
+-----------------------------------------*/
+async function loadArtworks() {
+    let artworks = [];
+
+    try {
+        const response = await databases.listDocuments(databaseId, collectionId);
+
+        // Debug : affiche exactement ce que retourne Appwrite
+        console.log("Réponse Appwrite brute :", response);
+
+        artworks = response.documents;
+
+        if (!artworks || artworks.length === 0) {
+            console.warn("Appwrite n’a retourné aucune donnée. Utilisation des données tests.");
+            artworks = fallbackArtworks;
+        }
+    } catch (error) {
+        console.error("Erreur Appwrite :", error);
+        artworks = fallbackArtworks;
+    }
+
+    renderGallery(artworks);
+    setupFilters();
+}
+
+/* ----------------------------------------
+   AFFICHAGE DES CARTES DANS LA GALERIE
+-----------------------------------------*/
+function renderGallery(artworks) {
+    gallery.innerHTML = "";
+
+    artworks.forEach(art => {
+        // Sécurité : si une donnée manque, on met un fallback
+        const status = art.status || "indisponible";
+        const title = art.title || "Titre manquant";
+        const description = art.description || "";
+        const image = art.image || "https://via.placeholder.com/300x200?text=No+Image";
+
+        const statusClass = status === "disponible" ? "disponible" : "indisponible";
+        const badgeText = status === "disponible" ? "Disponible" : "Indisponible";
+
+        const html = `
+        <div class="artwork fade-in" data-status="${status}">
+            <span class="status-badge ${statusClass}">${badgeText}</span>
+
+            <div class="artwork-image">
+                <img src="${image}" alt="${title}">
+            </div>
+
+            <div class="artwork-content">
+                <h3 class="artwork-title">${title}</h3>
+                <p class="artwork-description">${description}</p>
+            </div>
+        </div>
+        `;
+
+        gallery.innerHTML += html;
+    });
+}
+
+/* ----------------------------------------
+   SYSTÈME DE FILTRES
+-----------------------------------------*/
+function setupFilters() {
+    const buttons = document.querySelectorAll(".filter-btn");
+
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            buttons.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            const filter = btn.dataset.filter;
+            const artworks = document.querySelectorAll(".artwork");
+
+            artworks.forEach(art => {
+                const status = art.dataset.status;
+
+                if (filter === "all" || filter === status) {
+                    art.classList.remove("hidden");
+                    art.style.display = "block";
+                } else {
+                    art.classList.add("hidden");
+                    setTimeout(() => { art.style.display = "none"; }, 300);
+                }
+            });
+        });
+    });
+}
+
+/* ----------------------------------------
+   LANCEMENT
+-----------------------------------------*/
+loadArtworks();
+</script>
+
+
 
 
 
@@ -1461,131 +1597,6 @@ buttons.forEach(btn => {
 });
 </script>
 
-<script type="module"> 
-import { Client, Databases } from "https://cdn.jsdelivr.net/npm/appwrite@13.0.0/+esm";
-
-/* ----------------------------------------
-   CONFIGURATION APPWRITE
------------------------------------------*/
-const client = new Client()
-    .setEndpoint("https://fra.cloud.appwrite.io/v1")
-    .setProject("691b5a7b002d3cfb0229");
-
-const databases = new Databases(client);
-
-const databaseId = "691caf610036e05d6d49";
-const collectionId = "artwork";
-
-/* ----------------------------------------
-   ELEMENT PRINCIPAL
------------------------------------------*/
-const gallery = document.querySelector(".gallery");
-
-/* ----------------------------------------
-   DONNÉES DE SECOURS SI APPWRITE BUG
------------------------------------------*/
-const fallbackArtworks = [
-    {
-        title: "Test Œuvre 1",
-        description: "Description de test 1",
-        image: "https://via.placeholder.com/300x200?text=Artwork+1",
-        status: "disponible"
-    },
-    {
-        title: "Test Œuvre 2",
-        description: "Description de test 2",
-        image: "https://via.placeholder.com/300x200?text=Artwork+2",
-        status: "indisponible"
-    }
-];
-
-/* ----------------------------------------
-   CHARGER LES ŒUVRES DE LA BASE
------------------------------------------*/
-async function loadArtworks() {
-    let artworks = [];
-
-    try {
-        const response = await databases.listDocuments(databaseId, collectionId);
-        console.log("Réponse Appwrite brute :", response);
-        artworks = response.documents;
-
-        if (!artworks || artworks.length === 0) {
-            console.warn("Appwrite n’a retourné aucune donnée. Utilisation des données tests.");
-            artworks = fallbackArtworks;
-        }
-    } catch (error) {
-        console.error("Erreur Appwrite :", error);
-        artworks = fallbackArtworks;
-    }
-
-    renderGallery(artworks);
-    setupFilters();
-}
-
-/* ----------------------------------------
-   AFFICHAGE DES CARTES DANS LA GALERIE
------------------------------------------*/
-function renderGallery(artworks) {
-    gallery.innerHTML = "";
-
-    artworks.forEach(art => {
-        const statusClass = art.status === "disponible" ? "disponible" : "indisponible";
-        const badgeText = art.status === "disponible" ? "Disponible" : "Indisponible";
-
-        const html = `
-        <div class="artwork fade-in" data-status="${art.status}">
-            <span class="status-badge ${statusClass}">${badgeText}</span>
-
-            <div class="artwork-image">
-                <img src="${art.image}" alt="${art.title}">
-            </div>
-
-            <div class="artwork-content">
-                <h3 class="artwork-title">${art.title}</h3>
-                <p class="artwork-description">${art.description}</p>
-            </div>
-        </div>
-        `;
-
-        gallery.innerHTML += html;
-    });
-}
-
-/* ----------------------------------------
-   SYSTÈME DE FILTRES
------------------------------------------*/
-function setupFilters() {
-    const buttons = document.querySelectorAll(".filter-btn");
-    const artworks = document.querySelectorAll(".artwork");
-
-    buttons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            buttons.forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-
-            const filter = btn.dataset.filter;
-
-            artworks.forEach(art => {
-                const status = art.dataset.status;
-
-                if (filter === "all" || filter === status) {
-                    art.classList.remove("hidden");
-                    art.style.display = "block";
-                } else {
-                    art.classList.add("hidden");
-                    setTimeout(() => { art.style.display = "none"; }, 300);
-                }
-            });
-        });
-    });
-}
-
-/* ----------------------------------------
-   LANCEMENT
------------------------------------------*/
-loadArtworks();
-</script>
 
 </body>
 </html>
