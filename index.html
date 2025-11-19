@@ -1266,13 +1266,13 @@ async function loadArtworks() {
     try {
         const response = await databases.listDocuments(databaseId, collectionId);
 
-        // Debug : affiche exactement ce que retourne Appwrite
+        // Debug : voir exactement ce que retourne Appwrite
         console.log("Réponse Appwrite brute :", response);
 
         artworks = response.documents;
 
         if (!artworks || artworks.length === 0) {
-            console.warn("Appwrite n’a retourné aucune donnée. Utilisation des données tests.");
+            console.warn("Aucune donnée Appwrite. Utilisation des données fallback.");
             artworks = fallbackArtworks;
         }
     } catch (error) {
@@ -1291,7 +1291,8 @@ function renderGallery(artworks) {
     gallery.innerHTML = "";
 
     artworks.forEach(art => {
-        // Sécurité : si une donnée manque, on met un fallback
+        if (!art) return; // sécurité si document undefined
+
         const status = art.status || "indisponible";
         const title = art.title || "Titre manquant";
         const description = art.description || "";
