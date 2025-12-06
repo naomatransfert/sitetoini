@@ -440,6 +440,11 @@ body {
     text-transform: uppercase;
 }
 
+#portfolio {
+    scroll-margin-top: 0px; /* tu peux tester différentes valeurs */
+}
+
+
 /* ===================== TABLETTE LARGE (iPad paysage, 1024px et moins) ===================== */
 @media (max-width: 1024px) {
     .section-title {
@@ -457,6 +462,10 @@ body {
         margin-top: -20px;
         letter-spacing: 2px;
     }
+
+    #portfolio {
+    scroll-margin-top: 100px; /* tu peux tester différentes valeurs */
+}
 }
 
 /* ===================== PETIT MOBILE (480px et moins) ===================== */
@@ -854,6 +863,11 @@ body {
     gap: 15px;
 }
 
+#about {
+    scroll-margin-top: 45px; /* ajuster selon la hauteur que tu veux laisser au-dessus */
+}
+
+
 /* Animation mots qui tombent */
 @keyframes fall {
   0% {
@@ -1059,6 +1073,10 @@ body {
         font-size: 0.78rem;
         border-radius: 24px;
     }
+
+    #about {
+    scroll-margin-top: 70px; /* ajuster selon la hauteur que tu veux laisser au-dessus */
+}
 }
 
 /* ===== PETIT MOBILE ===== */
@@ -1627,6 +1645,11 @@ body {
     animation: slide 4s linear infinite;
 }
 
+#contact {
+    scroll-margin-top: 40px; /* distance depuis le haut de la page */
+}
+
+
 @keyframes slide {
     0% { background-position: 0 0; }
     100% { background-position: 200% 0; }
@@ -1704,6 +1727,10 @@ body {
         justify-content: center;
         margin: 0 auto;
     }
+
+    #contact {
+    scroll-margin-top: 60px; /* distance depuis le haut de la page */
+}
 }
 
 /* ================== RESPONSIVE MOBILE MOYEN / GRAND ================== */
@@ -2039,7 +2066,7 @@ body {
  -->
 
 <div class="contact-section-2">
-    <section id="about" class="about">
+    <section id="contact" class="about"> <!-- id changé de "about" à "contact" -->
         <!-- Titre en haut -->
         <h2 class="section-title fade-in">Contact</h2>
         <div class="contact-wrapper">
@@ -2072,6 +2099,7 @@ body {
         </div>
     </section>
 </div>
+
 
 
 
