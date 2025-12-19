@@ -350,17 +350,51 @@ body {
 
 
 .hero {
+    position: relative;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    position: relative;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.788) 0%, rgba(0,0,0,0.3) 100%), 
-                url('COVER.webp') no-repeat center center;
-    background-size: cover;
-    color: white; /* pour que le texte ressorte sur l'image */
+    overflow: hidden;
+    color: white;
 }
+
+.hero::before,
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 1s ease-in-out;
+    z-index: -1;
+}
+
+/* Image initiale avec fondu noir */
+.hero::before {
+    background-image: linear-gradient(
+        rgba(0,0,0,0.6), rgba(0,0,0,0.6)
+    ), url('cover.png');
+    opacity: 1;
+}
+
+.hero::after {
+    opacity: 0;
+}
+
+
+.hero::before {
+    background-image: var(--before-bg, linear-gradient(
+        180deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.3) 100%), url('cover.png'));
+    opacity: var(--before-opacity, 1);
+}
+
+.hero::after {
+    background-image: var(--after-bg);
+    opacity: var(--after-opacity, 0);
+}
+
 
 
 
@@ -660,62 +694,35 @@ body {
 }
 
 
-
 @media (max-width: 768px) {
 
-    /* ==================== GALLERY HORIZONTAL ==================== */
+    /* ==================== GALLERY ==================== */
     .gallery {
-        display: flex;
-        flex-direction: row;
-        gap: 20px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 20px;
-
-        /* padding pour centrer les extrémités */
-        padding-left: calc((100% - 80%) / 2); /* moitié de l’espace restant */
-        padding-right: calc((100% - 80%) / 2);
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        padding: 0;
         margin: 0;
-    }
-
-    .gallery::-webkit-scrollbar {
-        display: none;
-    }
-    .gallery {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
     }
 
     /* ==================== ARTWORK ==================== */
     .artwork {
-        flex: 0 0 80%;
-        scroll-snap-align: center;
         border-radius: 14px;
         overflow: hidden;
         position: relative;
+        background: #0e0e0e;
         cursor: pointer;
-        transition: transform 0.35s ease, box-shadow 0.35s ease;
-        max-height: 320px; /* Hauteur fermée */
+        transition: transform 0.3s ease;
     }
 
-    /* Désactivation totale des effets hover sur mobile */
-    .artwork:hover {
-        transform: none !important;
-        box-shadow: none !important;
-    }
-
-    /* Ouvre le détail au clic */
-    .artwork.open {
-        max-height: 1000px;
+    .artwork:active {
+        transform: scale(0.97);
     }
 
     /* ==================== IMAGE ==================== */
     .artwork-image {
         width: 100%;
-        height: 280px;
-        border-radius: 14px;
+        height: 160px;
         overflow: hidden;
     }
 
@@ -728,68 +735,24 @@ body {
 
     /* ==================== TEXTE ==================== */
     .artwork-content {
-        padding: 15px 10px;
-        opacity: 0;
-        max-height: 0;
-        overflow: hidden;
-        transition: all 0.5s ease;
-        color: #000; /* texte noir */
-    }
-
-    .artwork.open .artwork-content {
-        opacity: 1;
-        max-height: 300px;
+        padding: 10px;
     }
 
     .artwork-title {
-        font-size: 1rem !important;
+        font-size: 0.85rem;
         font-weight: 600;
-        margin-bottom: 8px;
-        color: #e3e3e3;
+        color: #eaeaea;
+        margin-bottom: 4px;
     }
 
     .artwork-description {
-        font-size: 0.7rem !important;
-        line-height: 1.5;
-        color: #e0e0e0;
-        opacity: 0.9;
+        font-size: 0.7rem;
+        line-height: 1.4;
+        color: #cfcfcf;
+        opacity: 0.85;
     }
 }
 
-/* iPad vertical */
-@media (max-width: 834px) {
-    .portfolio {
-        padding: 80px 30px; /* moins d'espace pour s'adapter à l'écran */
-    }
-
-    .section-title {
-        font-size: 2.3rem; /* titre un peu plus petit */
-        margin-bottom: 50px;
-        letter-spacing: 2px;
-    }
-
-    .gallery {
-        gap: 40px; /* réduire l'espace entre les artworks */
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* colonnes adaptées */
-    }
-
-    .artwork-image {
-        height: 220px; /* images un peu plus petites */
-    }
-
-    .artwork-title {
-        font-size: 1.6rem;
-    }
-
-    .artwork-description {
-        font-size: 0.95rem;
-    }
-
-    .more-btn {
-        font-size: 0.95rem;
-        padding: 6px 18px;
-    }
-}
 
 
 .about {
@@ -1132,7 +1095,7 @@ body {
 
     .nav-btn {
         padding: 4px 8px !important; /* légèrement plus petit */
-        font-size: 0.6rem !important; /* réduit */
+        font-size: 0.5rem !important; /* réduit */
         white-space: nowrap !important;
         border-radius: 24px !important; /* arrondi maximal pour les boutons */
     }
@@ -1285,26 +1248,36 @@ body {
 }
 
 .footer-logo {
-    font-size: 2.5rem;
-    font-weight: 200;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    background: linear-gradient(45deg, #FF5E00, #FF8C42);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 15px;
-    font-family: 'Georgia', serif;
+    margin-bottom: 18px;
+    display: flex;
+    justify-content: center;
 }
 
-.footer-description {
-    color: var(--color-subtext, #666);
-    margin-bottom: 20px;
-    line-height: 1.6;
-    font-weight: 300;
-    font-size: 1.1rem;
-    text-align: center;
+.footer-logo img {
+    width: 165px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+
+    /* signature subtile */
+    transform: scaleX(1.1);
+    transition: transform 0.4s ease, filter 0.4s ease;
+
+    /* lueur professionnelle, douce */
+    filter:
+        drop-shadow(0 0 2px rgba(255, 140, 66, 0.45))
+        drop-shadow(0 0 6px rgba(255, 140, 66, 0.25));
 }
+
+
+.footer-logo img:hover {
+    transform: scaleX(1.14);
+    filter:
+        drop-shadow(0 0 4px rgba(255, 140, 66, 0.55))
+        drop-shadow(0 0 10px rgba(255, 140, 66, 0.35));
+}
+
+
 
 .social-links {
     display: flex;
@@ -1897,7 +1870,112 @@ body {
     100% { left: 100%; }
 }
 
+.expo-section {
+    padding: 100px 20px;
+    background: #ffffff;
+    text-align: center;
+}
 
+.expo-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.expo-title {
+    font-size: 2.2rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    color: #111111;
+}
+
+.expo-subtitle {
+    font-size: 0.95rem;
+    color: #555555;
+    margin-bottom: 50px;
+}
+
+/* Galerie */
+.expo-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 50px;
+}
+
+.expo-gallery img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.expo-gallery img:hover {
+    transform: scale(1.04);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Bouton */
+.expo-btn {
+    display: inline-block;
+    padding: 14px 34px;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #ff6a00;
+    border: 1px solid rgba(255, 106, 0, 0.6);
+    border-radius: 50px;
+    transition: all 0.35s ease;
+    background: transparent;
+}
+
+.expo-btn:hover {
+    background: rgba(255, 106, 0, 0.08);
+    box-shadow: 0 0 18px rgba(255, 106, 0, 0.25);
+}
+
+@media (max-width: 992px) {
+    .expo-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .expo-gallery img {
+        height: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .expo-section {
+        padding: 80px 15px;
+    }
+
+    .expo-title {
+        font-size: 1.8rem;
+    }
+
+    .expo-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 30px;
+    }
+
+    .expo-gallery {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .expo-gallery img {
+        height: 180px;
+    }
+
+    .expo-btn {
+        padding: 12px 28px;
+        font-size: 0.8rem;
+    }
+}
 
 
 
@@ -1927,13 +2005,15 @@ body {
 
     <main>
         <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h1 class="hero-title">Toinipepe</h1>
-                <p class="hero-subtitle">Artiste Peintre • Créateur d'Émotions</p>
-                <a href="#portfolio" class="cta-button">Découvrir</a>
-            </div>
-        </section>
+<section class="hero">
+    <div class="hero-bg"></div> <!-- calque pour le fondu -->
+    <div class="hero-content">
+        <h1 class="hero-title">Toinipepe</h1>
+        <p class="hero-subtitle">Artiste Peintre • Créateur d'Émotions</p>
+        <a href="#portfolio" class="cta-button">Découvrir</a>
+    </div>
+</section>
+
 
         <div class="image-divider"></div>
 
@@ -1990,7 +2070,7 @@ body {
         <!-- Œuvre 5 -->
         <div class="artwork fade-in">
             <div class="artwork-image">
-                <img src="Capture d'écran 2025-09-14 195954.png" alt="Éclat de Joie">
+                <img src="Capture d'écran 2025-09-14 200229.png" alt="Éclat de Joie">
             </div>
             <div class="artwork-content">
                 <h3 class="artwork-title">Éclat de Joie</h3>
@@ -2009,15 +2089,32 @@ body {
             </div>
         </div>
 
+                <!-- Œuvre 7 -->
+        <div class="artwork fade-in">
+            <div class="artwork-image">
+                <img src="Capture d'écran 2025-09-14 195923.png" alt="Éclat de Joie">
+            </div>
+            <div class="artwork-content">
+                <h3 class="artwork-title">Éclat de Joie</h3>
+                <p class="artwork-description">Une célébration délicate de la vie à travers des nuances lumineuses.</p>
+            </div>
+        </div>
+
+                <!-- Œuvre 8 -->
+        <div class="artwork fade-in">
+            <div class="artwork-image">
+                <img src="cover.png" alt="Éclat de Joie">
+            </div>
+            <div class="artwork-content">
+                <h3 class="artwork-title">Éclat de Joie</h3>
+                <p class="artwork-description">Une célébration délicate de la vie à travers des nuances lumineuses.</p>
+            </div>
+        </div>
+
+
     </div>
 
-    <div class="gallery-arrow left">
-        <svg viewBox="0 0 24 24"><path d="M15 6L9 12L15 18"/></svg>
-    </div>
-    <div class="gallery-arrow right">
-        <svg viewBox="0 0 24 24"><path d="M9 6L15 12L9 18"/></svg>
-    </div>
-</div>
+
 
     <!-- Bouton ajouté -->
 <div class="more-btn-container fade-in">
@@ -2058,6 +2155,26 @@ body {
                 <span class="skill-tag visible">Art Contemporain</span>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- div expo -->
+<section class="expo-section">
+    <div class="expo-container">
+
+        <h2 class="expo-title">Mes Expositions</h2>
+        <p class="expo-subtitle">
+            Découvrez les lieux où mes œuvres prennent vie.
+        </p>
+
+        <div class="expo-gallery">
+            <img src="salons-exposition.jpg" alt="Exposition ToinePepe">
+            <img src="91995466_o.jpg" alt="Exposition ToinePepe">
+            <img src="1141725-exposition-street-art-colors-festival-x-tracks-119-a7c0574.jpg" alt="Exposition ToinePepe">
+        </div>
+
+        <a href="#" class="expo-btn">Voir les lieux d’expositions</a>
+
     </div>
 </section>
 
@@ -2103,6 +2220,7 @@ body {
 
 
 
+
 <script>
     function handleContact() {
         alert('Redirection vers le formulaire de contact ou ouverture de l\'email...');
@@ -2124,13 +2242,17 @@ body {
         <div class="floating-element"></div>
     </div>
 
-    <div class="footer-content">
-        <!-- Company Info -->
-        <div class="footer-section">
-            <div class="footer-logo">ToinePepe</div>
-            <p class="footer-description">
-                Peintre passionné, je partage ici mon univers et mes créations, reflet de ma vision et de ma sensibilité.
-            </p>
+<div class="footer-content">
+    <!-- Company Info -->
+    <div class="footer-logo">
+        <img src="toini toile 2025-09-22 183908.svg" alt="ToinePepe logo">
+    </div>
+
+    <p class="footer-description">
+        Peintre passionné, je partage ici mon univers et mes créations, reflet de ma vision et de ma sensibilité.
+    </p>
+</div>
+
             <div class="social-links">
                 <a href="#" class="social-link" title="Facebook">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -2333,6 +2455,31 @@ leftArrow.addEventListener('click', () => {
 rightArrow.addEventListener('click', () => {
     gallery.scrollBy({ left: scrollAmount, behavior: 'smooth' });
 });
+
+</script>
+
+
+<script>
+const hero = document.querySelector('.hero');
+const images = ['cover.png', 'IMG_6349.jpg', 'couverture.jpeg'];
+let index = 0;
+let showingBefore = true;
+
+setInterval(() => {
+    index = (index + 1) % images.length;
+    if (showingBefore) {
+        hero.style.setProperty('--after-bg', `linear-gradient(
+            180deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.3) 100%), url('${images[index]}')`);
+        hero.style.setProperty('--after-opacity', 1);
+        hero.style.setProperty('--before-opacity', 0);
+    } else {
+        hero.style.setProperty('--before-bg', `linear-gradient(
+            180deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.3) 100%), url('${images[index]}')`);
+        hero.style.setProperty('--before-opacity', 1);
+        hero.style.setProperty('--after-opacity', 0);
+    }
+    showingBefore = !showingBefore;
+}, 6000);
 
 </script>
 
