@@ -13,7 +13,7 @@
     --color-primary: #ff6528;
     --color-primary-hover: #ff8a59;
     --color-secondary-bg: #ffffff;
-    --color-tertiary-bg: #ffffff;
+    --color-tertiary-bg: #ffffff00;
     --color-shadow: rgba(0,0,0,0.08);
     --color-shadow-hover: rgba(0,0,0,0.15);
     --color-cta-shadow: rgba(255, 159, 122, 0.3);
@@ -22,6 +22,8 @@
     --color-artwork-gradient-end: #e8e8e8;
     --color-border-light: rgba(0,0,0,0.05);
 }
+
+
 
 
 
@@ -72,6 +74,7 @@ h1:hover::after, h2:hover::after, h3:hover::after, h4:hover::after, h5:hover::af
 
 
 
+
 /* Texte général */
 body, p, li, span, a {
     font-family: var(--font-text);
@@ -92,9 +95,66 @@ body {
     font-family: 'Georgia', serif;
     line-height: 1.6;
     overflow-x: hidden;
-    background: var(--color-background);
+    background-image: url("texture.jpg");
     color: var(--color-text);
 }
+body {
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0),
+            rgba(0, 0, 0, 0)
+        ),
+        url("texture.jpg") center / cover no-repeat;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll;
+    }
+}
+
+
+.hero-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Image responsive */
+.hero-logo img {
+    max-width: 250px;   /* largeur max */
+    width: 60%;         /* adaptative */
+    height: auto;
+    display: block;
+    transition: transform 0.35s ease, filter 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Effet survol : zoom + lueur orange */
+.hero-logo img:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.175)); /* lueur orange */
+    cursor: pointer;
+}
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+    .hero-logo img {
+        max-width: 180px;
+        width: 70%;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-logo img {
+        max-width: 140px;
+        width: 80%;
+    }
+}
+
+
+
 
 /* Ajoute ce CSS dans ta balise <style> */
 /* ...existing code... */
@@ -371,22 +431,12 @@ body {
     z-index: -1;
 }
 
-/* Image initiale avec fondu noir */
-.hero::before {
-    background-image: linear-gradient(
-        rgba(0,0,0,0.6), rgba(0,0,0,0.6)
-    ), url('cover.png');
-    opacity: 1;
-}
-
-.hero::after {
-    opacity: 0;
-}
-
-
 .hero::before {
     background-image: var(--before-bg, linear-gradient(
-        180deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.3) 100%), url('cover.png'));
+        180deg, 
+        rgba(0,0,0,0.3) 0%,  /* noir plus léger en bas */
+        rgba(0,0,0,0.1) 100% /* presque transparent en haut */
+    ), url('cover.png'));
     opacity: var(--before-opacity, 1);
 }
 
@@ -394,6 +444,23 @@ body {
     background-image: var(--after-bg);
     opacity: var(--after-opacity, 0);
 }
+
+
+
+.hero::before {
+    background-image: var(--before-bg, linear-gradient(
+        180deg, 
+        rgba(0,0,0,0.3) 0%,  /* noir plus léger en bas */
+        rgba(0,0,0,0.1) 100% /* presque transparent en haut */
+    ), url('cover.png'));
+    opacity: var(--before-opacity, 1);
+}
+
+.hero::after {
+    background-image: var(--after-bg);
+    opacity: var(--after-opacity, 0);
+}
+
 
 
 
@@ -426,6 +493,7 @@ body {
 /* ================= HERO MOBILE ================= */
 @media (max-width: 768px) {
 
+
     .hero-content {
         max-width: 90%; /* occupe presque toute la largeur */
         padding: 0 10px;
@@ -438,7 +506,7 @@ body {
     }
 
     .hero-subtitle {
-        font-size: 1rem; /* réduit pour mobile */
+        font-size: 0.96rem; /* réduit pour mobile */
         margin-bottom: 30px;
         line-height: 1.4;
     }
@@ -459,7 +527,7 @@ body {
 /* Portfolio Section minimaliste */
 .portfolio {
     padding: 105px 40px;
-    background: var(--color-secondary-bg);
+    background: rgba(255, 255, 255, 0);
     position: relative;
     text-align: center; /* Ajoute ceci */
 }
@@ -473,6 +541,14 @@ body {
     letter-spacing: 4px;
     text-transform: uppercase;
 }
+#contact { /* ou la section qui contient le titre */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* centre verticalement */
+    align-items: center;     /* centre horizontalement */
+    min-height: 300px;       /* ou la hauteur que tu souhaites */
+}
+
 
 #portfolio {
     scroll-margin-top: 0px; /* tu peux tester différentes valeurs */
@@ -491,7 +567,7 @@ body {
 /* ===================== MOBILE CLASSIQUE (768px et moins) ===================== */
 @media (max-width: 768px) {
     .section-title {
-        font-size: 2rem;
+        font-size: 2rem !important;
         margin-bottom: 70px !important;
         margin-top: -20px;
         letter-spacing: 2px;
@@ -505,19 +581,38 @@ body {
 /* ===================== PETIT MOBILE (480px et moins) ===================== */
 @media (max-width: 480px) {
     .section-title {
-        font-size: 2.2rem;
+        font-size: 1.4rem !important;
         margin-bottom: 40px;
         letter-spacing: 1.5px;
     }
 }
 
-/* ===================== TRÈS PETIT MOBILE / TELEPHONES COMPACTES (360px et moins) ===================== */
-@media (max-width: 360px) {
-    .section-title {
-        font-size: 2rem !important;
-        margin-bottom: 35px;
-        letter-spacing: 1px;
-    }
+
+
+
+
+/* Calque pour le fondu */
+.hero-bg {
+    position: absolute;
+    inset: 0; /* couvre toute la section */
+    background-size: cover;
+    background-position: center;
+    transition: background-image 1s ease-in-out;
+    z-index: 1;
+}
+
+/* Overlay blanc -> vert */
+.hero-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(255, 255, 255, 0) 0%, /* blanc en bas */
+        rgba(0, 0, 0, 0.527) 100%    /* vert en haut */
+    );
+    pointer-events: none; /* ne bloque pas les clics */
+    z-index: 2;
 }
 
 
@@ -597,6 +692,7 @@ body {
     transform: translateX(6px) scale(1.2);
     color: #ffa229;
 }
+
 
 
 
@@ -693,6 +789,105 @@ body {
     right: 10px;
 }
 
+/* Cacher le texte des artworks sur mobile */
+@media (max-width: 768px) {
+    .artwork-content,
+    .artwork-title,
+    .artwork-description {
+        display: none !important;
+    }
+}
+
+
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.95);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    text-align: center;
+    color: #fff;
+}
+
+.lightbox-img {
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+    margin-bottom: 20px;
+}
+
+.lightbox-text {
+    background: rgba(255, 109, 24, 0);
+    padding: 15px 20px;
+    border-radius: 10px;
+}
+
+.lightbox-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.lightbox-description {
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
+.lightbox-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #ffffff; /* titre blanc */
+}
+
+.lightbox-description {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #ffffff; /* description blanche */
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 3rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #ffa229;
+}
+
+@media (max-width: 768px) {
+    .lightbox-img {
+        max-width: 80%;   /* largeur réduite sur mobile */
+        max-height: 50vh; /* hauteur adaptée à l'écran */
+        margin-bottom: 15px;
+    }
+
+    .lightbox-title {
+        font-size: 1.8rem; /* titre légèrement plus petit */
+        margin-top: 30px;  /* espace au-dessus du titre */
+    }
+
+    .lightbox-description {
+        font-size: 1rem;   /* texte plus petit pour mobile */
+        line-height: 1.5;
+    }
+}
+
 
 @media (max-width: 768px) {
 
@@ -753,387 +948,129 @@ body {
     }
 }
 
+/* Cacher les éléments desktop-only sur mobile */
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none;
+    }
+}
 
+@media (max-width: 968px) {
 
-.about {
-    padding: 100px 40px 120px 40px; /* un peu moins d'espace en haut pour équilibrer */
-    background: var(--color-tertiary-bg);
-    display: flex;
-    flex-direction: column; /* titre en haut, wrapper dessous */
-    align-items: center;
-    justify-content: flex-start;
+    /* ==================== GALLERY ==================== */
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* ==================== ARTWORK ==================== */
+    .artwork {
+        border-radius: 14px;
+        overflow: hidden;
+        position: relative;
+        background: #0e0e0e;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .artwork:active {
+        transform: scale(0.97);
+    }
+
+    /* ==================== IMAGE ==================== */
+    .artwork-image {
+        width: 100%;
+        height: 240px; /* + long verticalement */
+        overflow: hidden;
+    }
+
+    .artwork-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* ==================== TEXTE ==================== */
+    .artwork-content {
+        padding: 10px;
+    }
+
+    .artwork-title {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #eaeaea;
+        margin-bottom: 4px;
+    }
+
+    .artwork-description {
+        font-size: 0.7rem;
+        line-height: 1.4;
+        color: #cfcfcf;
+        opacity: 0.85;
+    }
+
+    /* ==================== CACHER LES ŒUVRES DESKTOP-ONLY ==================== */
+    .desktop-only {
+        display: none;
+    }
 }
 
 
-/* Wrapper pour aligner image et texte */
-.about-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 60px;
-    max-width: 1200px;
+.skills-marquee {
+  width: 100%;
+  overflow: hidden;
+  background: var(--color-tertiary-bg);
+  padding: 40px 0;
 }
 
-/* Image désaxée */
-.about-image {
-    flex: 1 1 400px;
-    transform: rotate(-3deg) translateY(-10px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-    border-radius: 16px;
-    overflow: hidden;
-    transition: transform 0.5s ease, box-shadow 0.5s ease;
+.marquee {
+  display: flex;
+  gap: 50px;
+  animation: marquee 30s linear infinite;
 }
 
-.about-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.about-image:hover {
-    transform: rotate(0deg) translateY(0);
-    box-shadow: 0 25px 80px rgba(0,0,0,0.35);
-}
-
-/* Contenu du bloc texte */
-.about-content {
-    flex: 1 1 500px;
-    background: var(--color-secondary-bg);
-    padding: 60px 40px;
-    border-radius: 16px;
-    box-shadow: 0 15px 50px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.about-content:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-}
-
-.about-text {
-    font-size: 1.2rem;
-    color: #555;
-    line-height: 1.8;
-    margin-bottom: 40px;
-    font-weight: 300;
-}
-
-/* Skills */
-.skills {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-#about {
-    scroll-margin-top: 45px; /* ajuster selon la hauteur que tu veux laisser au-dessus */
-}
-
-
-/* Animation mots qui tombent */
-@keyframes fall {
-  0% {
-    transform: translateY(-150px) rotate(10deg);
-    opacity: 0;
-  }
-  60% {
-    transform: translateY(20px) rotate(-5deg);
-    opacity: 1;
-  }
-  80% {
-    transform: translateY(-5px) rotate(2deg);
-  }
-  100% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-  }
-}
-
-/* Tremblement */
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-4px); }
-  40% { transform: translateX(4px); }
-  60% { transform: translateX(-3px); }
-  80% { transform: translateX(3px); }
-}
-
-/* Style des skills */
-.skill-tag {
-  padding: 10px 20px;
+.marquee span {
+  padding: 12px 25px;
   background: var(--color-primary);
   color: white;
   border-radius: 25px;
-  font-weight: 300;
-  letter-spacing: 1px;
-  font-size: 0.9rem;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-  cursor: pointer;
-  display: inline-block;
-  opacity: 0;
+  white-space: nowrap;
+  font-weight: 500;
+  box-shadow: 0 5px 20px rgba(255, 248, 242, 0.37);
+  cursor: default;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hover rebond et glow */
-.skill-tag:hover {
-  transform: scale(1.2) translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-  animation: shake 0.4s ease;
+.marquee span:hover {
+  transform: scale(1.2);
+  box-shadow: 0 10px 30px rgba(255, 182, 85, 0.435);
 }
 
-/* Quand la classe .visible est ajoutée */
-.skill-tag.visible {
-  animation: fall 1s ease forwards;
+/* Animation défilement */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
-/* Cascade des skills */
-.skill-tag.visible:nth-child(1) { animation-delay: 0.2s; }
-.skill-tag.visible:nth-child(2) { animation-delay: 0.4s; }
-.skill-tag.visible:nth-child(3) { animation-delay: 0.6s; }
-.skill-tag.visible:nth-child(4) { animation-delay: 0.8s; }
-.skill-tag.visible:nth-child(5) { animation-delay: 1s; }
-
-/* ABOUT SECTION - ULTRA PRO, CENTERED, BUTTON MINI MOVEMENT ON CLICK ALL BUTTONS, FULL CENTERED TEXT */
-
-:root {
-  --about-radius: 18px;
-  --about-shadow: 0 14px 40px rgba(0,0,0,0.18);
-  --about-shadow-click: 0 25px 70px rgba(0,0,0,0.28);
-}
-
-.about {
-    padding: 80px 30px 100px;
-    background: var(--color-tertiary-bg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.about-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    max-width: 1200px;
-    width: 100%;
-    justify-items: center;
-    text-align: center;
-}
-
-/* IMAGE */
-.about-image {
-    width: 100%;
-    border-radius: var(--about-radius);
-    overflow: hidden;
-    box-shadow: var(--about-shadow);
-    transition: transform 0.45s ease, box-shadow 0.45s ease;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.about-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-}
-
-.about-content {
-    background: var(--color-secondary-bg);
-    padding: 55px 45px;
-    border-radius: var(--about-radius);
-    box-shadow: var(--about-shadow);
-    display: flex;
-    flex-direction: column;
-    gap: 35px;
-    cursor: pointer;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.about-text {
-    font-size: 1.1rem;
-    line-height: 1.75;
-    color: rgba(0,0,0,0.7);
-    font-weight: 300;
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-/* SKILLS */
-.skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-    align-items: center;
-}
-
-.skill-tag {
-    position: relative;
-    padding: 9px 18px;
-    background: var(--color-primary);
-    color: #fff;
-    border-radius: 30px;
+/* Responsive */
+@media (max-width: 768px) {
+  .marquee {
+    gap: 30px;
+  }
+  .marquee span {
     font-size: 0.85rem;
-    font-weight: 300;
-    letter-spacing: 0.5px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-    opacity: 0;
-    transform: translateY(15px);
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-    cursor: pointer;
-    overflow: hidden;
+    padding: 8px 18px;
+  }
 }
 
-.skill-tag.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-/* ===== RESPONSIVE TABLET ===== */
-@media (max-width: 1024px) {
-    .about-wrapper {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        justify-items: center;
-        text-align: center;
-    }
-
-    .about-content {
-        padding: 45px 35px;
-    }
-
-    .about-text {
-        font-size: 1rem;
-    }
-}
-
-/* ===== RESPONSIVE MOBILE ===== */
-@media (max-width: 768px) {
-    .about {
-        padding: 60px 20px 80px;
-    }
-
-    .about-content {
-        padding: 32px 20px;
-        border-radius: 14px;
-    }
-
-    .about-text {
-        font-size: 0.95rem;
-    }
-
-    .skill-tag {
-        padding: 7px 14px;
-        font-size: 0.78rem;
-        border-radius: 24px;
-    }
-
-    #about {
-    scroll-margin-top: 70px; /* ajuster selon la hauteur que tu veux laisser au-dessus */
-}
-}
-
-/* ===== PETIT MOBILE ===== */
-@media (max-width: 480px) {
-    .about {
-        padding: 45px 15px 65px;
-    }
-
-    .about-content {
-        padding: 25px 15px;
-    }
-
-    .about-text {
-        font-size: 0.9rem;
-    }
-}
-
-/* ========== NAVIGATION MOBILE — LOGO + BOUTONS ARRONDIS ========== */
-@media (max-width: 768px) {
-
-    .header {
-        height: 68px !important; /* hauteur de la barre de navigation */
-        display: flex !important;
-        align-items: center !important;
-    }
-
-    .nav-modern {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        width: 90% !important;
-        height: 0% !important;
-        border-radius: 25px !important; /* arrondi de la barre */
-        padding: 0 8px !important; /* un peu d’espace intérieur */
-        background-color: rgba(255, 255, 255, 0.92) !important; /* optionnel, léger fond pour voir l’arrondi */
-    }
-
-    .logo img {
-        height: 40px !important;  /* logo légèrement plus grand */
-        width: auto !important;
-        display: block !important;
-    }
-
-    .nav-menu {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        margin-left: auto !important;
-        gap: 8px !important;
-        flex-wrap: nowrap !important;
-    }
-
-    .nav-btn {
-        padding: 4px 8px !important; /* légèrement plus petit */
-        font-size: 0.5rem !important; /* réduit */
-        white-space: nowrap !important;
-        border-radius: 24px !important; /* arrondi maximal pour les boutons */
-    }
-}
-
-/* ========= NAVIGATION ULTRA SMALL — iPhone SE & <360px ========= */
-@media (max-width: 360px) {
-
-    .header {
-        height: 60px !important; 
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
-
-    .nav-modern {
-        width: 92% !important;
-        padding: 0 6px !important;
-        border-radius: 22px !important;
-        gap: 4px !important;
-    }
-
-    .logo img {
-        height: 34px !important; /* logo encore plus compact */
-        width: auto !important;
-    }
-
-    .nav-menu {
-        gap: 4px !important; /* réduit l'espace */
-    }
-
-    .nav-btn {
-        padding: 3px 6px !important; 
-        font-size: 0.5rem !important; 
-        border-radius: 22px !important;
-        white-space: nowrap !important;
-    }
-}
 
 
 
@@ -1619,8 +1556,9 @@ body {
 }
 
 #contact {
-    scroll-margin-top: 40px; /* distance depuis le haut de la page */
+    scroll-margin-top: 120px; /* distance depuis le haut de la page */
 }
+
 
 
 @keyframes slide {
@@ -1705,6 +1643,139 @@ body {
     scroll-margin-top: 60px; /* distance depuis le haut de la page */
 }
 }
+.see-more-btn {
+    background: none;
+    border: none;
+    color: orange;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    transition: color 0.3s;
+}
+
+.see-more-btn:hover {
+    color: darkorange;
+}
+
+/* Fond noir fullscreen */
+.full-view-modal {
+    display: none;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.95);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 40px 20px;
+    overflow-y: auto;
+}
+
+/* Contenu modal */
+.modal-content {
+    max-width: 1200px;
+    width: 90%;
+    display: flex;
+    gap: 5rem; /* espace entre image et texte */
+    align-items: flex-start;
+    color: #fff;
+    flex-wrap: wrap; /* pour mobile */
+}
+
+/* Image à gauche */
+.modal-image img {
+    max-width: 450px;
+    width: 100%;
+    border-radius: 20px;
+    flex-shrink: 0;
+}
+
+/* Bloc texte à droite */
+.modal-text {
+    flex: 1;
+    max-width: 800px; /* élargissement sur PC */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centre le contenu horizontalement */
+}
+
+/* Titre centré par rapport au texte */
+.modal-card-title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: rgb(255, 255, 255);
+    text-align: center; /* centré dans le bloc texte */
+}
+
+/* Description */
+.full-description {
+    font-size: 1.15rem;
+    line-height: 2;
+    color: #fff;
+    text-align: justify;
+    max-width: 100%; /* occupe toute la largeur du bloc texte */
+}
+
+/* Responsive : tablettes et mobiles */
+@media (max-width: 1024px) {
+    .modal-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    /* supprime l'image sur mobile */
+    .modal-image {
+        display: none;
+    }
+
+    .modal-text {
+        max-width: 100%;
+        align-items: center;
+    }
+
+    .full-description {
+        text-align: center;
+    }
+
+    .modal-card-title {
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        padding: 20px 10px;
+    }
+
+    .modal-card-title {
+        font-size: 2rem; /* titre légèrement plus petit */
+        margin-top: 90px; /* espace au-dessus du titre */
+        margin-bottom: 1.5rem;
+    }
+
+    .full-description {
+        font-size: 1rem; /* texte plus petit pour mobile */
+        line-height: 1.6; /* ligne plus compacte */
+    }
+}
+
+
+
+
+
+
+/* Animation fade in */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 
 /* ================== RESPONSIVE MOBILE MOYEN / GRAND ================== */
 @media (min-width: 480px) and (max-width: 768px) {
@@ -1872,7 +1943,7 @@ body {
 
 .expo-section {
     padding: 100px 20px;
-    background: #ffffff;
+    background: #ffffff00;
     text-align: center;
 }
 
@@ -1917,7 +1988,7 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
-/* Bouton */
+/* Bouton blanc avec contours orange */
 .expo-btn {
     display: inline-block;
     padding: 14px 34px;
@@ -1925,17 +1996,27 @@ body {
     letter-spacing: 1.5px;
     text-transform: uppercase;
     text-decoration: none;
-    color: #ff6a00;
-    border: 1px solid rgba(255, 106, 0, 0.6);
+    color: #ff6a00;           /* texte orange */
+    border: 2px solid #ff6a00; /* contour orange */
     border-radius: 50px;
+    background: #ffffff;       /* fond blanc */
     transition: all 0.35s ease;
-    background: transparent;
+    box-shadow: 0 5px 15px rgba(255,106,0,0.15);
+    cursor: pointer;
 }
 
+/* Hover : fond orange léger, texte blanc */
 .expo-btn:hover {
-    background: rgba(255, 106, 0, 0.08);
-    box-shadow: 0 0 18px rgba(255, 106, 0, 0.25);
+    background: #ff6a00;       /* fond orange */
+    color: #ffffff;            /* texte blanc */
+    box-shadow: 0 8px 25px rgba(255,106,0,0.4);
+    transform: scale(1.05);
 }
+
+#expo-section {
+    scroll-margin-top: 100px; /* tu peux tester différentes valeurs */
+}
+
 
 @media (max-width: 992px) {
     .expo-gallery {
@@ -1954,7 +2035,7 @@ body {
     }
 
     .expo-title {
-        font-size: 1.8rem;
+        font-size: 1.4rem;
     }
 
     .expo-subtitle {
@@ -1981,35 +2062,129 @@ body {
 
 
 
+/* Burger caché par défaut */
+.nav-burger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-burger span {
+    height: 3px;
+    background: #ff8102;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Menu mobile caché par défaut */
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.98);
+    gap: 30px;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.mobile-menu a {
+    color: #fff;
+    font-size: 2rem;
+    text-decoration: none;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.mobile-menu a:hover {
+    color: #ff8102;
+    transform: scale(1.1);
+}
+
+/* Media query : iPhone 17 Pro Max et plus petits (≤430px) */
+@media (max-width: 430px) {
+    .nav-menu {
+        display: none; /* cacher les boutons classiques */
+    }
+    .nav-burger {
+        display: flex; /* afficher le burger */
+    }
+    .mobile-menu.active {
+        display: flex;
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+/* Burger animé en croix */
+.nav-burger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.nav-burger.active span:nth-child(2) {
+    opacity: 0;
+}
+.nav-burger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+
+
 
 
 
 </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="nav-modern">
-            <div class="logo">
-                <img class="logo" src="toini toile 2025-09-22 183908.svg" alt="Toinipepe Logo">
-            </div>
-            <nav class="nav-menu">
-                <a href="#portfolio" class="nav-btn"><span>Portfolio</span></a>
-                <a href="#about" class="nav-btn"><span>À Propos</span></a>
-                <a href="#contact" class="nav-btn"><span>Contact</span></a>
-            </nav>
+<header class="header">
+    <div class="nav-modern">
+        <div class="logo">
+            <img class="logo" src="toini toile 2025-09-22 183908.svg" alt="Toini Logo">
         </div>
 
-        
-    </header>
+        <nav class="nav-menu">
+            <a href="#portfolio" class="nav-btn"><span>Portfolio</span></a>
+            <a href="#expo-section" class="nav-btn"><span>Expositions</span></a>
+            <a href="#contact" class="nav-btn"><span>Démarche artistique</span></a>
+        </nav>
+
+        <!-- Burger -->
+        <div class="nav-burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Menu mobile plein écran -->
+    <div class="mobile-menu">
+        <a href="#portfolio">Portfolio</a>
+        <a href="#expo-section">Expositions</a>
+        <a href="#contact">Démarche artistique</a>
+    </div>
+</header>
+
+
 
     <main>
         <!-- Hero Section -->
 <section class="hero">
     <div class="hero-bg"></div> <!-- calque pour le fondu -->
     <div class="hero-content">
-        <h1 class="hero-title">Toinipepe</h1>
-        <p class="hero-subtitle">Artiste Peintre • Créateur d'Émotions</p>
+        <div class="hero-logo">
+    <img src="svg logo cover.svg" alt="Toini">
+</div>
+
+        <p class="hero-subtitle">Artiste Peintre plasticien • Créateur d'Émotions</p>
         <a href="#portfolio" class="cta-button">Découvrir</a>
     </div>
 </section>
@@ -2019,62 +2194,76 @@ body {
 
 <!-- Portfolio Section -->
 <section id="portfolio" class="portfolio">
-    <h2 class="section-title fade-in">Œuvres</h2>
+    <h2 class="section-title fade-in">PORTFOLIO</h2>
 
     <div class="gallery">
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <div class="lightbox-content">
+    <img class="lightbox-img" src="" alt="">
+    <div class="lightbox-text">
+      <h3 class="lightbox-title"></h3>
+      <p class="lightbox-description"></p>
+    </div>
+  </div>
+</div>
+
+
 
         <!-- Œuvre 1 -->
         <div class="artwork fade-in">
             <div class="artwork-image">
-                <img src="Capture d'écran 2025-09-14 200229.png" alt="Symphonie Colorée">
+                <img src="portf1.jpeg" alt="Mosaïque d’identité">
             </div>
             <div class="artwork-content">
-                <h3 class="artwork-title">Symphonie Colorée</h3>
-                <p class="artwork-description">Une exploration subtile des nuances et des émotions à travers des compositions harmonieuses et contemplatives.</p>
+                <h3 class="artwork-title">Mosaïque d’identité</h3>
+                <p class="artwork-description">Un visage fragmenté comme une cartographie intérieure.Chaque forme raconte une facette de l’identité en construction.</p>
             </div>
         </div>
 
         <!-- Œuvre 2 -->
         <div class="artwork fade-in">
             <div class="artwork-image">
-                <img src="Capture d'écran 2025-09-14 195839.png" alt="Reflets d'Âme">
+                <img src="portf2.jpeg" alt="Pensées infinies">
             </div>
             <div class="artwork-content">
-                <h3 class="artwork-title">Reflets d'Âme</h3>
-                <p class="artwork-description">Cette toile capture l'essence de l'introspection dans une approche minimaliste et poétique.</p>
+                <h3 class="artwork-title">Pensées infinies</h3>
+                <p class="artwork-description">Le regard s’égare entre formes et couleurs.Un flux intérieur, sans début ni fin.</p>
             </div>
         </div>
 
         <!-- Œuvre 3 -->
         <div class="artwork fade-in">
             <div class="artwork-image">
-                <img src="Capture d'écran 2025-09-14 195923.png" alt="Horizon Infini">
+                <img src="portf3.jpeg" alt="Poème solaire">
             </div>
             <div class="artwork-content">
-                <h3 class="artwork-title">Horizon Infini</h3>
-                <p class="artwork-description">Un voyage pictural vers la sérénité, où les horizons se dessinent en douceur.</p>
+                <h3 class="artwork-title">Poème solaire</h3>
+                <p class="artwork-description">La lumière sculpte le visage et révèle la force intérieure. Une présence tournée vers l’élan et l’affirmation.</p>
             </div>
         </div>
 
         <!-- Œuvre 4 -->
         <div class="artwork fade-in">
             <div class="artwork-image">
-                <img src="Capture d'écran 2025-09-14 195937.png" alt="Métamorphose">
+                <img src="portf4.jpeg" alt="Le Silence de Kyoto">
             </div>
             <div class="artwork-content">
-                <h3 class="artwork-title">Métamorphose</h3>
-                <p class="artwork-description">L'art de la transformation exprimé avec élégance et subtilité.</p>
+                <h3 class="artwork-title">Le Silence de Kyoto</h3>
+                <p class="artwork-description">Entre retenue et élégance, le calme devient langage. Une émotion suspendue, presque imperceptible.</p>
             </div>
         </div>
 
         <!-- Œuvre 5 -->
         <div class="artwork fade-in">
             <div class="artwork-image">
-                <img src="Capture d'écran 2025-09-14 200229.png" alt="Reflets d'Âme">
+                <img src="portf5.jpeg" alt="Lumière nocturne">
             </div>
             <div class="artwork-content">
-                <h3 class="artwork-title">Reflets d'Âme</h3>
-                <p class="artwork-description">Cette toile capture l'essence de l'introspection dans une approche minimaliste et poétique.</p>
+                <h3 class="artwork-title">Lumière nocturne</h3>
+                <p class="artwork-description">Dans l’obscurité, la lumière persiste. Un contraste intime entre profondeur et éclat.</p>
             </div>
         </div>
 
@@ -2082,22 +2271,22 @@ body {
         <!-- Œuvre 6 -->
         <div class="artwork fade-in">
             <div class="artwork-image">
-                <img src="Capture d'écran 2025-09-14 200014.png" alt="Murmures du Temps">
+                <img src="portf6.jpeg" alt="Rouge sacré">
             </div>
             <div class="artwork-content">
-                <h3 class="artwork-title">Murmures du Temps</h3>
-                <p class="artwork-description">Le passage du temps évoqué par des textures subtiles et des nuances nostalgiques.</p>
+                <h3 class="artwork-title">Rouge sacré</h3>
+                <p class="artwork-description">Le rouge comme symbole de force et de mémoire. Une figure ancrée, habitée par ses racines.</p>
             </div>
         </div>
 
         <!-- Œuvre 7 -->
         <div class="artwork fade-in">
             <div class="artwork-image">
-                <img src="Capture d'écran 2025-09-14 195923.png" alt="Horizon Infini">
+                <img src="portf7.jpeg" alt="Héritage contemporain">
             </div>
             <div class="artwork-content">
-                <h3 class="artwork-title">Horizon Infini</h3>
-                <p class="artwork-description">Un voyage pictural vers la sérénité, où les horizons se dessinent en douceur.</p>
+                <h3 class="artwork-title">Héritage contemporain</h3>
+                <p class="artwork-description">Le passé dialogue avec le présent. Une identité nourrie de traditions et de modernité.</p>
             </div>
         </div>
 
@@ -2105,21 +2294,35 @@ body {
         <!-- Œuvre 8 -->
         <div class="artwork fade-in">
             <div class="artwork-image">
-                <img src="Capture d'écran 2025-09-14 195937.png" alt="Métamorphose">
+                <img src="portf8.jpeg" alt="Éclats de rose">
             </div>
             <div class="artwork-content">
-                <h3 class="artwork-title">Métamorphose</h3>
-                <p class="artwork-description">L'art de la transformation exprimé avec élégance et subtilité.</p>
+                <h3 class="artwork-title">Éclats de rose</h3>
+                <p class="artwork-description">Douceur et fragilité se mêlent aux lignes fragmentées. Une émotion délicate, presque murmurée.</p>
             </div>
         </div>
 
+<!-- Œuvre 9 (desktop only) -->
+<div class="artwork fade-in desktop-only">
+    <div class="artwork-image">
+        <img src="portf9.jpeg" alt="Reine d’ailleurs">
     </div>
+    <div class="artwork-content">
+        <h3 class="artwork-title">Reine d’ailleurs</h3>
+        <p class="artwork-description">Une figure intemporelle, entre puissance et mystère. L’écho d’un ailleurs, riche de métissages.</p>
+    </div>
+</div>
+
+
+    </div>
+
+    
 
 
 
     <!-- Bouton ajouté -->
 <div class="more-btn-container fade-in">
-    <a href="#" class="more-btn">En savoir plus ! <span class="arrow">→</span></a>
+    <a href="https://voltaic-stool-9ef.notion.site/Toini-2ca05fc1b24580738993c3bac7f9c16b?source=copy_link" class="more-btn">En savoir plus ! <span class="arrow">→</span></a>
 </div>
 
 
@@ -2130,51 +2333,57 @@ body {
 
 
 
-<!-- About Section -->
-<section id="about" class="about">
-    <!-- Titre en haut -->
-    <h2 class="section-title fade-in">À Propos</h2>
+<!-- Skills Infinite Marquee -->
+<section class="skills-marquee">
+  <div class="marquee">
+    <span>Fragmentation</span>
+    <span>Identité</span>
+    <span>Mémoire</span>
+    <span>Racines</span>
+    <span>Couleur</span>
+    <span>Métissage</span>
 
-    <div class="about-wrapper fade-in">
-        <!-- Image désaxée -->
-        <div class="about-image">
-            <img src="photoabout.png" alt="Photo About" />
-        </div>
+    <span>Fragmentation</span>
+    <span>Identité</span>
+    <span>Mémoire</span>
+    <span>Racines</span>
+    <span>Couleur</span>
+    <span>Métissage</span>
 
-        <!-- Contenu -->
-        <div class="about-content">
-            <p class="about-text">
-                Passionné par l'art depuis toujours, je puise mon inspiration dans la contemplation du monde qui nous entoure. Chaque œuvre est une invitation au dialogue silencieux entre l'artiste et l'observateur, une exploration des émotions humaines exprimée avec subtilité et raffinement.
-            </p>
+    <span>Fragmentation</span>
+    <span>Identité</span>
+    <span>Mémoire</span>
+    <span>Racines</span>
+    <span>Couleur</span>
+    <span>Métissage</span>
 
-            <!-- Skills -->
-            <div class="skills">
-                <span class="skill-tag visible">Peinture à l'Huile</span>
-                <span class="skill-tag visible">Acrylique</span>
-                <span class="skill-tag visible">Aquarelle</span>
-                <span class="skill-tag visible">Techniques Mixtes</span>
-                <span class="skill-tag visible">Art Contemporain</span>
-            </div>
-        </div>
-    </div>
+    <span>Fragmentation</span>
+    <span>Identité</span>
+    <span>Mémoire</span>
+    <span>Racines</span>
+    <span>Couleur</span>
+    <span>Métissage</span>
+  </div>
 </section>
 
+
+
 <!-- div expo -->
-<section class="expo-section">
+<section id="expo-section" class="expo-section">
     <div class="expo-container">
 
-        <h2 class="expo-title">Mes Expositions</h2>
+        <h2 class="expo-title">EXPOSITIONS À VENIR</h2>
         <p class="expo-subtitle">
             Découvrez les lieux où mes œuvres prennent vie.
         </p>
 
         <div class="expo-gallery">
-            <img src="salons-exposition.jpg" alt="Exposition ToinePepe">
-            <img src="91995466_o.jpg" alt="Exposition ToinePepe">
-            <img src="1141725-exposition-street-art-colors-festival-x-tracks-119-a7c0574.jpg" alt="Exposition ToinePepe">
+            <img src="image0.jpeg" alt="Exposition ToinePepe">
+            <img src="image1.jpeg" alt="Exposition ToinePepe">
+            <img src="image2.jpeg" alt="Exposition ToinePepe">
         </div>
 
-        <a href="#" class="expo-btn">Voir les lieux d’expositions</a>
+        <a href="https://voltaic-stool-9ef.notion.site/Toini-2ca05fc1b24580738993c3bac7f9c16b?source=copy_link" class="expo-btn">Voir les lieux d’expositions</a>
 
     </div>
 </section>
@@ -2184,50 +2393,65 @@ body {
  -->
 
 <div class="contact-section-2">
-    <section id="contact" class="about"> <!-- id changé de "about" à "contact" -->
-        <!-- Titre en haut -->
-        <h2 class="section-title fade-in">Contact</h2>
-        <div class="contact-wrapper">
-            <div class="contact-card">
-                <!-- Section image -->
-                <div class="image-section">
-                    <div class="image-container">
-                        <img src="IMG_6349.jpg" alt="Portrait de la personne" class="profile-image">
-                        <div class="image-accent"></div>
-                    </div>
-                </div>
-
-                <!-- Section contenu -->
-                <div class="content-section">
-                    <div class="decorative-dot"></div>
-                    <h3 class="artist-name">Antoine Phelipot</h3>
-                    <p class="artist-title">Artiste Visuel & Créateur</p>
-                    <p class="artist-description">
-                        Passionné par l'art, je transforme .... Chaque projet est une nouvelle exploration des couleurs, des formes et des sensations qui nous entourent.
-                    </p>
-
-                    <button class="contact-button" onclick="handleContact()">
-                        Contactez-moi
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
+  <section id="contact" class="about">
+    <h2 class="section-title fade-in">DÉMARCHE ARTISTIQUE</h2>
+    <div class="contact-wrapper">
+      <div class="contact-card">
+        <div class="image-section">
+          <div class="image-container">
+            <img src="IMG_6349.jpg" alt="Portrait de la personne" class="profile-image">
+          </div>
         </div>
-    </section>
+
+        <div class="content-section">
+          <div class="decorative-dot"></div>
+          <h3 class="artist-name">Toini...</h3>
+          <p class="artist-description" id="artist-description">
+            Je suis Antoine Phelipot, artiste peintre plasticien, et je signe mes œuvres sous le nom Toini.
+            Mon travail.. 
+
+          </p>
+
+          <button class="see-more-btn" onclick="openFullView()">Voir plus</button>
+
+          <button class="contact-button" onclick="handleContact()">
+            Contactez-moi
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="full-view-modal" class="full-view-modal" onclick="closeFullView()">
+  <div class="modal-content" onclick="event.stopPropagation();">
+    <div class="modal-image">
+      <img src="IMG_6349.jpg" alt="Portrait de la personne">
+    </div>
+    <div class="modal-text">
+      <h2 class="modal-card-title">Toini</h2>
+      <p class="full-description">
+        Je suis Antoine Phelipot, artiste peintre plasticien, et je signe mes œuvres sous le nom Toini.
+        Mon travail explore la fragmentation comme un langage : une façon de révéler ce qui se construit, se fissure, puis se répare.
+        Je peins des visages et des présences, à la frontière du réalisme et de l’abstraction, pour faire dialoguer l’évidence et le mystère.
+        La mémoire traverse mes compositions, comme une trace, un écho, parfois un silence, lié à ce qui demeure enfoui ou oublié.
+        Au cœur de ma démarche, il y a l’identité, nourrie par les racines, multiple, sensible, en mouvement.
+        Je travaille entre peinture et collage, avec une recherche d’équilibre entre tension graphique et finesse.
+        L’introspection guide mon geste : je cherche une émotion juste, sans surenchère, qui laisse de la place à l’émotion de celui qui regarde.
+        Mes œuvres parlent aussi de métissage, de couleurs, de rencontres et de récits qui se superposent.
+        Chaque toile est une invitation à s’approcher, à prendre le temps, et à ressentir.
+      </p>
+    </div>
+  </div>
 </div>
 
 
 
-
-
 <script>
-    function handleContact() {
-        alert('Redirection vers le formulaire de contact ou ouverture de l\'email...');
-        // Exemple : window.location.href = 'mailto:contact@exemple.com';
-        // Ou : window.location.href = '#contact-form';
-    }
+<button onclick="handleContact()">Contact</button>
 </script>
 
 
@@ -2250,47 +2474,59 @@ body {
     </div>
 
     <p class="footer-description">
-        Peintre passionné, je partage ici mon univers et mes créations, reflet de ma vision et de ma sensibilité.
+        Intéressé par mon travail ou envie d’échanger ? Je suis joignable juste ici..
     </p>
 </div>
 
-            <div class="social-links">
-                <a href="#" class="social-link" title="Facebook">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                    </svg>
-                </a>
-                <a href="#" class="social-link" title="Instagram">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                    </svg>
-                </a>
-                <a href="#" class="social-link" title="LinkedIn">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                </a>
-                <a href="#" class="social-link" title="Twitter">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                    </svg>
+<div class="social-links">
+
+    <a href="mailto:toinipepe1@gmail.com" class="social-link" title="Email">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 
+                      1.1.9 2 2 2h16c1.1 0 2-.9 
+                      2-2V6c0-1.1-.9-2-2-2zm0 
+                      4-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+    </a>
+
+    <a href="https://www.instagram.com/toinipepe/" class="social-link" title="Instagram">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+    </a>
+
+    <a href="tel:+33612935400" class="social-link" title="Téléphone">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2
+            a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57
+            a1 1 0 011 1V20a1 1 0 01-1 1
+            C10.85 21 3 13.15 3 3
+            a1 1 0 011-1h3.5
+            a1 1 0 011 1c0 1.25.2 2.46.57 3.59
+            a1 1 0 01-.25 1.01l-2.2 2.19z"/>
+        </svg>
+    </a>
+
+</div>
+
                 </a>
             </div>
         </div>
     </div>
 </footer>
 
-    <!-- Footer Bottom -->
-    <footer class="footer-bottom">
-        <div class="footer-bottom-content">
-            <div class="copyright">
-                &copy; 2025 ToinePepe. Tous droits réservés.
-            </div>
-            <div class="footer-bottom-links">
-                <a href="#mentions-legales">Mentions légales</a>
-            </div>
+<footer class="footer-bottom" id="footer-bottom">
+    <div class="footer-bottom-content">
+        <div class="copyright">
+            &copy; 2025 toini — Site réalisé par 
+            <a href="https://www.instagram.com/naoma.studio" target="_blank">NaomaStudio</a>
         </div>
-    </footer>
+
+        <div class="footer-bottom-links">
+            <a href="#mentions-legales">Mentions légales</a>
+        </div>
+    </div>
+</footer>
 
 </main>
 
@@ -2462,27 +2698,113 @@ rightArrow.addEventListener('click', () => {
 
 <script>
 const hero = document.querySelector('.hero');
-const images = ['cover.png', 'IMG_6349.jpg', 'couverture.jpeg'];
+const images = ['cover.png', 'IMG_6349.jpg','oeuilcover.jpeg'];
 let index = 0;
 let showingBefore = true;
 
 setInterval(() => {
     index = (index + 1) % images.length;
+
+    // Dégradé noir plus léger : subtil sur toutes les images
+    const gradient = `linear-gradient(
+        180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%)`;
+
     if (showingBefore) {
-        hero.style.setProperty('--after-bg', `linear-gradient(
-            180deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.3) 100%), url('${images[index]}')`);
+        hero.style.setProperty('--after-bg', `${gradient}, url('${images[index]}')`);
         hero.style.setProperty('--after-opacity', 1);
         hero.style.setProperty('--before-opacity', 0);
     } else {
-        hero.style.setProperty('--before-bg', `linear-gradient(
-            180deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.3) 100%), url('${images[index]}')`);
+        hero.style.setProperty('--before-bg', `${gradient}, url('${images[index]}')`);
         hero.style.setProperty('--before-opacity', 1);
         hero.style.setProperty('--after-opacity', 0);
     }
     showingBefore = !showingBefore;
-}, 6000);
+}, 3000);
+</script>
+
+<script>
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.querySelector('.lightbox-img');
+const lightboxTitle = document.querySelector('.lightbox-title');
+const lightboxDescription = document.querySelector('.lightbox-description');
+const closeBtn = document.querySelector('.close');
+
+// Ouvrir le lightbox
+document.querySelectorAll('.artwork').forEach(artwork => {
+    artwork.addEventListener('click', () => {
+        const img = artwork.querySelector('img');
+        const title = artwork.querySelector('.artwork-title').innerText;
+        const description = artwork.querySelector('.artwork-description').innerText;
+
+        lightbox.style.display = 'flex';
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxTitle.innerText = title;
+        lightboxDescription.innerText = description;
+    });
+});
+
+// Fermer le lightbox
+closeBtn.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+});
+
+// Fermer si clic en dehors
+lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) lightbox.style.display = 'none';
+});
 
 </script>
+
+<script>
+const burger = document.querySelector('.nav-burger');
+const mobileMenu = document.querySelector('.mobile-menu');
+const mobileLinks = document.querySelectorAll('.mobile-menu a');
+
+// Ouvrir / fermer le menu burger
+burger.addEventListener('click', () => {
+    burger.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+});
+
+// Fermer le menu au clic sur un lien
+mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        burger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+    });
+});
+
+// Fermer le menu si on clique sur le fond (hors des liens)
+mobileMenu.addEventListener('click', (e) => {
+    if (e.target === mobileMenu) { // clic sur le menu mais pas sur un lien
+        burger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+    }
+});
+
+</script>
+
+<script>
+function openFullView() {
+    document.getElementById('full-view-modal').style.display = 'flex';
+}
+
+function closeFullView() {
+    document.getElementById('full-view-modal').style.display = 'none';
+}
+</script>
+
+<script>
+    function handleContact() {
+        document.getElementById('footer-bottom').scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
+</script>
+
+
+
 
 
 </body>
