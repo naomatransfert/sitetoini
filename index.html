@@ -1069,6 +1069,12 @@ body {
     font-size: 0.85rem;
     padding: 8px 18px;
   }
+
+  .marquee span.active {
+  transform: scale(1.2);
+  box-shadow: 0 10px 30px rgba(255, 182, 85, 0.435);
+}
+
 }
 
 
@@ -1767,6 +1773,23 @@ body {
 
 
 
+.close-modal-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    color: var(--color-artwork-gradient-end);
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    z-index: 10;
+}
+
+.close-modal-btn:hover {
+    color: var(--color-primary);
+}
 
 
 
@@ -2431,6 +2454,11 @@ body {
     <div class="modal-image">
       <img src="IMG_6349.jpg" alt="Portrait de la personne">
     </div>
+
+     <!-- Croix de fermeture -->
+    <button class="close-modal-btn" onclick="closeFullView()">×</button>
+
+
     <div class="modal-text">
       <h2 class="modal-card-title">Toini</h2>
       <p class="full-description">
@@ -2803,8 +2831,22 @@ function closeFullView() {
     }
 </script>
 
+<script>
+// Sélectionne tous les spans
+const marqueeItems = document.querySelectorAll('.marquee span');
 
+marqueeItems.forEach(item => {
+  // Au clic ou au touch
+  item.addEventListener('click', () => {
+    item.classList.add('active');
 
+    // Retirer l'effet après 300ms (comme hover)
+    setTimeout(() => {
+      item.classList.remove('active');
+    }, 300);
+  });
+});
+</script>
 
 
 </body>
