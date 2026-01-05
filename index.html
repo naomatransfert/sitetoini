@@ -2944,28 +2944,46 @@ function closeFullView() {
 <script>
     const modal = document.querySelector('.full-view-modal');
 const openButtons = document.querySelectorAll('.open-modal'); // tes boutons "Voir plus"
-const closeModal = modal.querySelector('.close-modal'); // bouton pour fermer
+const closeModal = modal.querySelector('.close-modal');
+
+let scrollPosition = 0; // pour garder la position du scroll
 
 // Ouvrir le modal
 openButtons.forEach(btn => {
     btn.addEventListener('click', () => {
+        // mémoriser la position actuelle
+        scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // bloquer le scroll
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${scrollPosition}px`;
+        document.body.style.left = '0';
+        document.body.style.right = '0';
+        document.body.style.width = '100%';
+
+        // afficher le modal
         modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // bloque le scroll du site
     });
 });
 
 // Fermer le modal
-closeModal.addEventListener('click', () => {
+function close() {
     modal.style.display = 'none';
-    document.body.style.overflow = ''; // réactive le scroll
-});
+
+    // rétablir le scroll à sa position initiale
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    window.scrollTo(0, scrollPosition); // remettre exactement au même endroit
+}
+
+closeModal.addEventListener('click', close);
 
 // Fermer si clic en dehors du contenu
 modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-    }
+    if (e.target === modal) close();
 });
 
 </script>
