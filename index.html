@@ -870,6 +870,65 @@ body {
     color: #ffa229;
 }
 
+/* Lightbox */
+#lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.95);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    text-align: center;
+    color: #fff;
+}
+
+.lightbox-img {
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+/* Flèches */
+.lightbox-prev, .lightbox-next {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3rem;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+    user-select: none;
+}
+
+.lightbox-prev:hover, .lightbox-next:hover {
+    color: #ffa229;
+}
+
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+
+/* Croix */
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 3rem;
+    color: #fff;
+    cursor: pointer;
+}
+.close:hover { color: #ffa229; }
+
+
 @media (max-width: 768px) {
     .lightbox-img {
         max-width: 80%;   /* largeur réduite sur mobile */
@@ -1498,58 +1557,7 @@ body {
     font-size: 0.95rem;
 }
 
-.contact-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
-    color: white;
-    padding: 18px 40px;
-    border-radius: 50px;
-    border: none;
-    font-size: 1.05rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 25px var(--color-cta-shadow);
-    align-self: center;
-    position: relative;
-    overflow: hidden;
-}
 
-.contact-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.6s ease;
-}
-
-.contact-button:hover::before {
-    left: 100%;
-}
-
-.contact-button:hover {
-    box-shadow: 0 12px 35px var(--color-cta-shadow-hover);
-    transform: translateY(-3px);
-}
-
-.contact-button:active {
-    transform: translateY(-1px);
-}
-
-.contact-button svg {
-    width: 22px;
-    height: 22px;
-    transition: transform 0.4s ease;
-}
-
-.contact-button:hover svg {
-    transform: translateX(6px);
-}
 
 .image-divider {
     width: 100%;
@@ -1639,11 +1647,6 @@ body {
         gap: 1rem;
     }
 
-    .contact-button {
-        width: 80%;
-        justify-content: center;
-        margin: 0 auto;
-    }
 
     #contact {
     scroll-margin-top: 60px; /* distance depuis le haut de la page */
@@ -2161,6 +2164,117 @@ body {
 }
 
 
+.contact-header-3 {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.contact-subtitle-3 {
+    font-size: 1.05rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--color-subtext);
+    margin-bottom: 2rem;
+}
+
+/* Capsule scroll */
+.scroll-prompt-3 {
+    width: 34px;
+    height: 56px;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.35);
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Point mobile */
+.scroll-prompt-3 span {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    animation: scrollCue3 2.2s ease-in-out infinite;
+}
+
+/* Animation directionnelle */
+@keyframes scrollCue3 {
+    0% {
+        top: 12px;
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    70% {
+        top: 36px;
+        opacity: 1;
+    }
+    100% {
+        top: 36px;
+        opacity: 0;
+    }
+}
+
+.phone-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 25px;
+    background-color: #ff5e0013; /* fond initial semi-transparent */
+    border-radius: 27px;
+    border: 2px solid #ff5e0060; /* contour orange */
+    cursor: pointer;
+    text-decoration: none; /* supprime le soulignement */
+    overflow: hidden;
+    transition: color 0.3s, transform 0.2s, border-color 0.3s;
+}
+
+.phone-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: #ff5e00dd; /* couleur du remplissage */
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    border-radius: 27px;
+    z-index: 0; /* derrière le texte */
+}
+
+.phone-button .phone-text {
+    position: relative;
+    color: #ff5e00 !important; /* texte au repos */
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 16px;
+    transition: color 0.4s;
+    z-index: 1; /* devant le pseudo-élément */
+}
+
+.phone-button:hover::before {
+    transform: scaleX(1); /* animation de remplissage */
+}
+
+.phone-button:hover .phone-text {
+    color: #fff !important; /* texte devient blanc au hover */
+}
+
+.phone-button:hover {
+    border-color: #FF5E00;
+    transform: translateY(-2px);
+}
+
+
+
+
+
+
 
 
 
@@ -2178,6 +2292,7 @@ body {
             <a href="#portfolio" class="nav-btn"><span>Portfolio</span></a>
             <a href="#expo-section" class="nav-btn"><span>Expositions</span></a>
             <a href="#contact" class="nav-btn"><span>Démarche artistique</span></a>
+            <a href="contact.html" class="nav-btn"><span>Contact</span></a>
         </nav>
 
         <!-- Burger -->
@@ -2193,6 +2308,7 @@ body {
         <a href="#portfolio">Portfolio</a>
         <a href="#expo-section">Expositions</a>
         <a href="#contact">Démarche artistique</a>
+        <a href="contact.html">Contact</a>
     </div>
 </header>
 
@@ -2224,6 +2340,11 @@ body {
 <!-- Lightbox -->
 <div id="lightbox" class="lightbox">
   <span class="close">&times;</span>
+
+  <!-- Flèches -->
+  <span class="lightbox-prev">&#10094;</span>
+  <span class="lightbox-next">&#10095;</span>
+
   <div class="lightbox-content">
     <img class="lightbox-img" src="" alt="">
     <div class="lightbox-text">
@@ -2232,6 +2353,7 @@ body {
     </div>
   </div>
 </div>
+
 
 
 
@@ -2345,7 +2467,7 @@ body {
 
     <!-- Bouton ajouté -->
 <div class="more-btn-container fade-in">
-    <a href="https://voltaic-stool-9ef.notion.site/Toini-2ca05fc1b24580738993c3bac7f9c16b?source=copy_link" class="more-btn">En savoir plus ! <span class="arrow">→</span></a>
+    <a href="https://voltaic-stool-9ef.notion.site/Toini-2ca05fc1b24580738993c3bac7f9c16b?source=copy_link" class="more-btn">La collection <span class="arrow">→</span></a>
 </div>
 
 
@@ -2430,16 +2552,14 @@ body {
           <div class="decorative-dot"></div>
           <h3 class="artist-name">Toini...</h3>
           <p class="artist-description" id="artist-description">
-            Je suis Antoine Phelipot, artiste peintre plasticien, et je signe mes œuvres sous le nom Toini.
-            Mon travail.. 
-
+             Je suis Antoine Phelipot, artiste peintre plasticien, et je signe mes œuvres sous le nom Toini.
+            Mon travail explore la fragmentation comme un langage : une façon de révéler ce qui se construit, se fissure, puis se répare. 
           </p>
 
           <button class="see-more-btn" onclick="openFullView()">Voir plus</button>
 
-          <button class="contact-button" onclick="handleContact()">
-            Contactez-moi
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+            
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
             </svg>
           </button>
@@ -2478,9 +2598,15 @@ body {
 
 
 
-<script>
-<button onclick="handleContact()">Contact</button>
-</script>
+<div class="contact-header-3">
+    <p class="contact-subtitle-3">Contact</p>
+
+    <div class="scroll-prompt-3">
+        <span></span>
+    </div>
+</div>
+
+
 
 
 
@@ -2508,14 +2634,6 @@ body {
 
 <div class="social-links">
 
-    <a href="mailto:toinipepe1@gmail.com" class="social-link" title="Email">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 
-                      1.1.9 2 2 2h16c1.1 0 2-.9 
-                      2-2V6c0-1.1-.9-2-2-2zm0 
-                      4-8 5-8-5V6l8 5 8-5v2z"/>
-        </svg>
-    </a>
 
     <a href="https://www.instagram.com/toinipepe/" class="social-link" title="Instagram">
         <svg viewBox="0 0 24 24" fill="currentColor">
@@ -2523,17 +2641,16 @@ body {
         </svg>
     </a>
 
-    <a href="tel:+33612935400" class="social-link" title="Téléphone">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2
-            a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57
-            a1 1 0 011 1V20a1 1 0 01-1 1
-            C10.85 21 3 13.15 3 3
-            a1 1 0 011-1h3.5
-            a1 1 0 011 1c0 1.25.2 2.46.57 3.59
-            a1 1 0 01-.25 1.01l-2.2 2.19z"/>
-        </svg>
-    </a>
+
+
+
+
+<a href="contact.html" class="phone-button" title="Contact">
+    <span class="phone-text">Contact</span>
+</a>
+
+
+
 
 </div>
 
@@ -2823,13 +2940,7 @@ function closeFullView() {
 }
 </script>
 
-<script>
-    function handleContact() {
-        document.getElementById('footer-bottom').scrollIntoView({
-            behavior: 'smooth'
-        });
-    }
-</script>
+
 
 <script>
 // Sélectionne tous les spans
@@ -2847,6 +2958,64 @@ marqueeItems.forEach(item => {
   });
 });
 </script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.querySelector('.lightbox-img');
+    const lightboxTitle = document.querySelector('.lightbox-title');
+    const lightboxDescription = document.querySelector('.lightbox-description');
+    const closeBtn = document.querySelector('.close');
+    const prevBtn = document.querySelector('.lightbox-prev');
+    const nextBtn = document.querySelector('.lightbox-next');
+    const artworks = Array.from(document.querySelectorAll('.artwork'));
+
+    let currentIndex = 0;
+
+    // Ouvrir le lightbox
+    artworks.forEach((artwork, index) => {
+        artwork.addEventListener('click', () => {
+            currentIndex = index;
+            showArtwork(currentIndex);
+            lightbox.style.display = 'flex';
+        });
+    });
+
+    // Afficher l’œuvre
+    function showArtwork(index) {
+        const art = artworks[index];
+        const img = art.querySelector('img');
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxTitle.innerText = art.querySelector('.artwork-title').innerText;
+        lightboxDescription.innerText = art.querySelector('.artwork-description').innerText;
+    }
+
+    // Fermer
+    closeBtn.addEventListener('click', () => lightbox.style.display = 'none');
+
+    // Fermer si clic en dehors de l'image
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) lightbox.style.display = 'none';
+    });
+
+    // Flèche gauche
+    prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex - 1 + artworks.length) % artworks.length;
+        showArtwork(currentIndex);
+    });
+
+    // Flèche droite
+    nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex + 1) % artworks.length;
+        showArtwork(currentIndex);
+    });
+});
+</script>
+
 
 
 </body>
