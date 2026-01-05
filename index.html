@@ -3,6 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Meta Tags Essentiels -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- SEO Meta Tags -->
+    <title>Toini - Artiste Peintre Plasticien | Antoine Phelipot | Art Contemporain</title>
+    <meta name="description" content="Découvrez l'univers de Toini (Antoine Phelipot), artiste peintre plasticien spécialisé dans l'art contemporain. Exploration de l'identité, la fragmentation et la mémoire à travers la peinture et le collage.">
+    <meta name="keywords" content="Toini, Antoine Phelipot, artiste peintre, plasticien, art contemporain, peinture, collage, fragmentation, identité, métissage, galerie art, exposition art, Bretagne, Chantepie">
+    <meta name="author" content="Antoine Phelipot (Toini)">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="French">
+    <meta name="revisit-after" content="7 days">
+
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="FR-BRE">
+    <meta name="geo.placename" content="Chantepie, Bretagne">
+    <meta name="geo.position" content="48.0881;-1.6173">
+    <meta name="ICBM" content="48.0881, -1.6173">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.toini-art.fr/">
+    <meta property="og:title" content="Toini - Artiste Peintre Plasticien | Art Contemporain">
+    <meta property="og:description" content="Découvrez l'univers artistique de Toini : peinture contemporaine, exploration de l'identité et de la mémoire. Portfolio, expositions et démarche artistique.">
+    <meta property="og:image" content="https://www.toini-art.fr/IMG_6349.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Toini Art">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.toini-art.fr/">
+    <meta name="twitter:title" content="Toini - Artiste Peintre Plasticien">
+    <meta name="twitter:description" content="Art contemporain, exploration de l'identité et de la mémoire par Toini (Antoine Phelipot)">
+    <meta name="twitter:image" content="https://www.toini-art.fr/IMG_6349.jpg">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.toini-art.fr/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="toini toile 2025-09-22 183908.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="toini toile 2025-09-22 183908.svg">
+
+    <!-- Preconnect pour optimiser les performances -->
+    <link rel="preconnect" href="https://fonts.googleapis.fr">
+    <link rel="preconnect" href="https://www.instagram.fr">
+
+
     <title>Toinipepe - Artiste Peintre</title>
     <style>
         :root {
@@ -1335,6 +1386,32 @@ body {
     z-index: 1;
 }
 
+/* Desktop uniquement */
+@media (min-width: 1024px) {
+
+    .social-links {
+        gap: 25px; /* légèrement plus large que mobile */
+        margin-top: 15px;
+    }
+
+    .social-link {
+        width: 60px;
+        height: 60px;
+        border-width: 2px;
+    }
+
+    .social-link:hover {
+        transform: translateY(-5px) scale(1.08);
+        box-shadow: 0 10px 28px rgba(255, 94, 0, 0.3);
+    }
+
+    .social-link svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+
 
  /* Footer Bottom */
 .footer-bottom {
@@ -2182,7 +2259,7 @@ body {
     width: 34px;
     height: 56px;
     border-radius: 30px;
-    border: 1px solid rgba(255,255,255,0.35);
+    border: 1px solid rgba(248, 158, 49, 0.712);
     margin: 0 auto;
     position: relative;
     overflow: hidden;
@@ -2225,7 +2302,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 25px;
+    padding: 10px 45px;
     background-color: #ff5e0013; /* fond initial semi-transparent */
     border-radius: 27px;
     border: 2px solid #ff5e0060; /* contour orange */
@@ -2272,8 +2349,13 @@ body {
 
 
 
-
-
+/* Texte footer légèrement plus grand sur desktop uniquement */
+@media (min-width: 1024px) {
+    .footer-description {
+        font-size: 1.45rem; /* ajustable selon ton goût */
+        margin-bottom: 2rem;
+    }
+}
 
 
 
@@ -2285,7 +2367,7 @@ body {
 <header class="header">
     <div class="nav-modern">
         <div class="logo">
-            <img class="logo" src="toini toile 2025-09-22 183908.svg" alt="Toini Logo">
+            <img class="logo" src="toini toile 2025-09-22 183908.svg" alt="Logo Toini - Artiste peintre plasticien">
         </div>
 
         <nav class="nav-menu">
@@ -2320,7 +2402,7 @@ body {
     <div class="hero-bg"></div> <!-- calque pour le fondu -->
     <div class="hero-content">
         <div class="hero-logo">
-    <img src="svg logo cover.svg" alt="Toini">
+    <img src="svg logo cover.svg" alt="cover">
 </div>
 
         <p class="hero-subtitle">Artiste Peintre plasticien • Créateur d'Émotions</p>
@@ -2382,7 +2464,7 @@ body {
         <!-- Œuvre 3 -->
         <div class="artwork fade-in">
             <div class="artwork-image">
-                <img src="portf3.jpeg" alt="Poème solaire">
+                <img src="portf3.jpeg" alt="Poème solaire - Portrait expressif par Toini">
             </div>
             <div class="artwork-content">
                 <h3 class="artwork-title">Poème solaire</h3>
@@ -3064,6 +3146,95 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Schema.org - Personne (Artiste) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Antoine Phelipot",
+  "alternateName": "Toini",
+  "url": "https://www.toini-art.fr",
+  "image": "https://www.toini-art.fr/IMG_6349.jpg",
+  "sameAs": [
+    "https://www.instagram.com/toinipepe/"
+  ],
+  "jobTitle": "Artiste Peintre Plasticien",
+  "description": "Artiste peintre plasticien explorant la fragmentation, l'identité et la mémoire à travers la peinture contemporaine et le collage",
+  "knowsAbout": ["Peinture", "Art Contemporain", "Collage", "Art Plastique", "Fragmentation", "Identité"],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Chantepie",
+    "addressRegion": "Bretagne",
+    "addressCountry": "FR"
+  }
+}
+</script>
+
+<!-- Schema.org - Site Web -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Toini Art",
+  "alternateName": "Antoine Phelipot Art",
+  "url": "https://www.toini-art.fr",
+  "description": "Portfolio et démarche artistique de Toini, artiste peintre plasticien",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.toini-art.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<!-- Schema.org - Galerie d'Images -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ImageGallery",
+  "name": "Portfolio Toini",
+  "description": "Collection d'œuvres d'art contemporain par Toini",
+  "url": "https://www.toini-art.fr/#portfolio",
+  "image": [
+    "https://www.toini-art.fr/portf1.jpeg",
+    "https://www.toini-art.fr/portf2.jpeg",
+    "https://www.toini-art.fr/portf3.jpeg",
+    "https://www.toini-art.fr/portf4.jpeg",
+    "https://www.toini-art.fr/portf5.jpeg"
+  ]
+}
+</script>
+
+<!-- Schema.org - Œuvres d'Art (exemple pour une œuvre) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VisualArtwork",
+  "name": "Mosaïque d'identité",
+  "creator": {
+    "@type": "Person",
+    "name": "Toini (Antoine Phelipot)"
+  },
+  "image": "https://www.toini-art.fr/portf1.jpeg",
+  "description": "Un visage fragmenté comme une cartographie intérieure. Chaque forme raconte une facette de l'identité en construction.",
+  "artform": "Peinture",
+  "artMedium": "Peinture et collage"
+}
+</script>
 
 
 </body>
