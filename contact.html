@@ -34,17 +34,18 @@
 .contact-container {
     max-width: 1100px;
     width: 100%;
-    /* Image de fond */
-    background: url('texture.jpg') no-repeat center center;
-    background-size: cover; /* Pour que l'image remplisse le container */
+    /* Fond avec overlay sombre */
+    background: linear-gradient(rgba(226, 226, 226, 0.335), rgba(184, 184, 184, 0.25)), 
+                url('texture.jpg') no-repeat center center;
+    background-size: cover; /* Image remplie le container */
     border-radius: 32px;
     overflow: hidden;
     box-shadow: 0 20px 80px var(--color-shadow);
     display: grid;
     grid-template-columns: 45% 55%;
     position: relative;
-    /* Optionnel : ajouter un overlay sombre pour texte lisible */
 }
+
 
 .contact-container::after {
     content: '';
@@ -331,7 +332,7 @@
         }
 
         .social-link:hover {
-            color: white;
+            color: rgb(0, 0, 0);
             border-color: var(--color-primary);
             transform: translateY(-5px) scale(1.1);
         }

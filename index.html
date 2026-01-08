@@ -10,9 +10,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- SEO Meta Tags -->
-    <title>Toini - Artiste Peintre Plasticien | Antoine Phelipot | Art Contemporain</title>
-    <meta name="description" content="Découvrez l'univers de Toini (Antoine Phelipot), artiste peintre plasticien spécialisé dans l'art contemporain. Exploration de l'identité, la fragmentation et la mémoire à travers la peinture et le collage.">
-    <meta name="keywords" content="Toini, Antoine Phelipot, artiste peintre, plasticien, art contemporain, peinture, collage, fragmentation, identité, métissage, galerie art, exposition art, Bretagne, Chantepie">
+    <title>Toini - Artiste Peintre Plasticien | Antoine Phelipot </title>
+    <meta name="description" content="Découvrez l'univers de Toini (Antoine Phelipot), artiste peintre plasticien. Exploration de l'identité, la fragmentation et la mémoire à travers la peinture et le collage.">
+    <meta name="keywords" content="Toini, Antoine Phelipot, artiste peintre, plasticien, peinture, collage, fragmentation, identité, métissage, galerie art, exposition art, Bretagne, Chantepie">
     <meta name="author" content="Antoine Phelipot (Toini)">
     <meta name="robots" content="index, follow">
     <meta name="language" content="French">
@@ -27,7 +27,7 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.toini-art.fr/">
-    <meta property="og:title" content="Toini - Artiste Peintre Plasticien | Art Contemporain">
+    <meta property="og:title" content="Toini - Artiste Peintre Plasticien | Créateur d'Émotions">
     <meta property="og:description" content="Découvrez l'univers artistique de Toini : peinture contemporaine, exploration de l'identité et de la mémoire. Portfolio, expositions et démarche artistique.">
     <meta property="og:image" content="https://www.toini-art.fr/IMG_6349.jpg">
     <meta property="og:image:width" content="1200">
@@ -39,7 +39,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://www.toini-art.fr/">
     <meta name="twitter:title" content="Toini - Artiste Peintre Plasticien">
-    <meta name="twitter:description" content="Art contemporain, exploration de l'identité et de la mémoire par Toini (Antoine Phelipot)">
+    <meta name="twitter:description" content="exploration de l'identité et de la mémoire par Toini (Antoine Phelipot)">
     <meta name="twitter:image" content="https://www.toini-art.fr/IMG_6349.jpg">
 
     <!-- Canonical URL -->
@@ -202,6 +202,8 @@ body {
         max-width: 140px;
         width: 80%;
     }
+
+    
 }
 
 
@@ -244,6 +246,30 @@ body {
     max-width: 800px;
     width: min(90vw, 800px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Animation */
+    animation: fadeInDown 0.8s ease-out forwards;
+}
+
+/* Cacher .nav-modern sur mobile */
+@media (max-width: 768px) {
+    .nav-modern {
+       background: rgba(255, 255, 255, 0.829);
+    }
+}
+
+
+
+/* Animation d'apparition */
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 
@@ -271,6 +297,10 @@ body {
     display: flex;
     gap: 32px;
 }
+
+
+
+
 
 .nav-btn {
     position: relative;
@@ -322,7 +352,88 @@ body {
     z-index: 1;
     pointer-events: none;
 }
-/* ...existing code... */
+
+
+/* Version mobile : boutons plus petits */
+@media (max-width: 768px) {
+    .nav-btn {
+        padding: 4px 5px !important;       /* réduit le padding */
+        font-size: 0.48rem !important;       /* texte plus petit */
+        border-radius: 28px;     /* arrondi légèrement plus petit */
+    }
+
+    .nav-btn::before {
+        border-radius: 28px;     /* arrondi cohérent avec le bouton */
+    }
+}
+
+
+/* iPhone 13 Pro Max portrait */
+@media (min-width: 428px) and (max-width: 428px) {
+    .nav-btn {
+        padding: 4px 8px !important;      /* boutons légèrement plus petits */
+        font-size: 0.52rem !important;     /* texte réduit */
+        border-radius: 28px !important;   /* arrondi adapté */
+    }
+
+    .nav-btn::before {
+        border-radius: 28px !important;
+    }
+}
+
+/* iPhone 11 Pro Max : max-width 414px uniquement */
+@media (max-width: 414px) {
+    .nav-btn {
+        padding: 4px 7.2px !important;       /* boutons plus petits */
+        font-size: 0.48rem !important;     /* texte réduit */
+        border-radius: 24px !important;    /* arrondi cohérent */
+    }
+
+    .nav-btn::before {
+        border-radius: 24px !important;    /* pseudo-élément cohérent */
+    }
+
+}
+
+
+/* iPhone 12 portrait */
+@media (min-width: 390px) and (max-width: 390px) {
+    .nav-btn {
+        padding: 4px 4px !important;      /* boutons un peu plus petits */
+        font-size: 0.5rem !important;     /* texte réduit */
+        border-radius: 28px !important;   /* arrondi adapté */
+    }
+
+    .nav-btn::before {
+        border-radius: 28px !important;
+    }
+}
+
+/* Version iPhone Mini : boutons très petits */
+@media (max-width: 375px) {
+    .nav-btn {
+        padding: 4px 5.1px !important;       /* padding réduit pour les très petits écrans */
+        font-size: 0.42rem !important;     /* texte plus petit */
+        border-radius: 20px !important;    /* arrondi un peu plus petit */
+    }
+
+    .nav-btn::before {
+        border-radius: 20px !important;    /* cohérent avec le bouton */
+    }
+}
+
+/* iPhone 5 portrait */
+@media (min-width: 320px) and (max-width: 320px) {
+    .nav-btn {
+        padding: 3px 2px !important;      /* boutons très petits */
+        font-size: 0.38rem !important;    /* texte réduit */
+        border-radius: 24px !important;   /* arrondi adapté */
+    }
+
+    .nav-btn::before {
+        border-radius: 24px !important;
+    }
+}
 
 
 
@@ -387,6 +498,25 @@ body {
 .logo img:hover {
     transform: scale(1.05);
 }
+
+/* Par défaut, cacher le logo sur tous les écrans ≤ 600px (smartphones) */
+@media (max-width: 600px) {
+    .logo {
+        display: none;
+    }
+}
+
+/* Afficher le logo sur iPad Mini portrait (601px à 768px) */
+@media (min-width: 601px) and (max-width: 768px) and (orientation: portrait) {
+    .logo {
+        display: block;       /* le logo apparaît */
+        margin: 4 auto;       /* centré horizontalement */
+        width: auto;          /* taille adaptée */
+        max-width: 180px;     /* optionnel : limite la largeur si besoin */
+    }
+}
+
+
 
 /* ================= NAVIGATION ================= */
 .nav-menu {
@@ -511,8 +641,6 @@ body {
     background-image: var(--after-bg);
     opacity: var(--after-opacity, 0);
 }
-
-
 
 
 
@@ -703,46 +831,42 @@ body {
     letter-spacing: 1px;
 }
 
+
+
+/* Container du bouton */
 .more-btn-container {
     text-align: center;
-    margin-top: 30px; /* un peu moins d'espace pour discrétion */
+    margin-top: 30px;
 }
 
-/* Style général du bouton */
 .more-btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 20px;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #fff;
-    background: #000;
-    border-radius: 8px;
+    gap: 6px;               /* espace entre texte et flèche */
+    padding: 10px 26px;     /* bouton plus fin */
+    font-size: 0.85rem;
+    font-weight: 400;        /* texte plus léger */
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
     text-decoration: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    color: #ff6a00;
+    border: 2px solid #ff6a00;
+    border-radius: 50px;
+    background: #ffffff;
+    box-shadow: 0 5px 12px rgba(255,106,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+    cursor: pointer;
 }
 
+/* Hover : fond orange, texte blanc, léger scale */
 .more-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 18px rgba(0,0,0,0.35);
-    background: #0d0d0d;
+    background: #ff6a00;
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(255,106,0,0.35);
+    transform: scale(1.05);
 }
 
-/* Flèche isolée pour animation */
-.arrow {
-    display: inline-block;  /* important pour isoler le scale */
-    font-size: 1.4rem;      /* taille initiale */
-    color: #f0f0f0;
-    transition: transform 0.3s ease, color 0.3s ease;
-}
 
-/* Animation au hover : seule la flèche grossit et glisse */
-.more-btn:hover .arrow {
-    transform: translateX(6px) scale(1.2);
-    color: #ffa229;
-}
 
 
 
@@ -978,6 +1102,7 @@ body {
     cursor: pointer;
 }
 .close:hover { color: #ffa229; }
+
 
 
 @media (max-width: 768px) {
@@ -1260,8 +1385,8 @@ body {
 
 /* Footer Styles - Centré et épuré */
 .premium-footer {
-    background: var(--color-secondary-bg, #f8f9fa);
-    color: var(--color-text, #333);
+    background: #f8f9fa00;
+    color: var(--color-text, #333333);
     position: relative;
     overflow: hidden;
     border-top: 1px solid rgba(255, 94, 0, 0.1);
@@ -1296,12 +1421,14 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    position: relative;
+
+    position: relative; /* IMPORTANT */
     z-index: 1;
 }
 
+
 .footer-logo {
-    margin-bottom: 18px;
+    margin-bottom: 0px;
     display: flex;
     justify-content: center;
 }
@@ -1348,7 +1475,7 @@ body {
     background: rgba(255, 94, 0, 0.1);
     border: 2px solid rgba(255, 94, 0, 0.3);
     border-radius: 50%;
-    color: var(--color-primary, #FF5E00);
+    color: var(--color-primary, #ffffff);
     transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     position: relative;
     overflow: hidden;
@@ -1416,7 +1543,7 @@ body {
  /* Footer Bottom */
 .footer-bottom {
     background-color: #ffffff; /* Fond très sombre */
-    color: #000000; /* Texte blanc */
+    color: #000000; 
     padding: 20px 30px;
     font-size: 14px;
     text-align: center;
@@ -1645,6 +1772,51 @@ body {
     background-size: 200% 100%;
     animation: slide 4s linear infinite;
 }
+
+
+/* Animation principale */
+@keyframes fadeInScaleUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-10px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Bloc contact initial */
+.contact-section-2 {
+    opacity: 0;
+}
+
+/* Quand visible */
+.contact-section-2.visible {
+    animation: fadeInScaleUp 0.8s ease-out forwards;
+}
+
+/* Animation séquentielle des cartes */
+.contact-card {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: none;
+}
+
+.contact-section-2.visible .contact-card {
+    animation: fadeInScaleUp 0.8s ease-out forwards;
+}
+
+/* Ajout de delay pour chaque carte pour effet cascade */
+.contact-section-2.visible .contact-card:nth-child(1) { animation-delay: 0.1s; }
+.contact-section-2.visible .contact-card:nth-child(2) { animation-delay: 0.3s; }
+.contact-section-2.visible .contact-card:nth-child(3) { animation-delay: 0.5s; }
+
+
 
 #contact {
     scroll-margin-top: 120px; /* distance depuis le haut de la page */
@@ -2120,6 +2292,62 @@ body {
     scroll-margin-top: 100px; /* tu peux tester différentes valeurs */
 }
 
+@media (min-width: 1024px) {
+
+    /* cacher les 3 images simples */
+    .expo-gallery > img {
+        display: none;
+    }
+
+    /* afficher le manège */
+    .expo-track {
+        display: flex;
+        gap: 18px;
+        width: max-content;
+        animation: expoScroll 40s linear infinite;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    .expo-gallery {
+        overflow: hidden;
+    }
+
+    .expo-track img {
+        width: 320px;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 12px;
+        flex-shrink: 0;
+        pointer-events: none;
+    }
+
+    @keyframes expoScroll {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(-50%);
+        }
+    }
+}
+
+
+/* Mobile / Tablette */
+@media (max-width: 1024px) {
+    .pc-only {
+        display: none;
+    }
+}
+
+/* PC */
+@media (min-width: 1025px) {
+    .mobile-only {
+        display: none;
+    }
+}
+
+
 
 @media (max-width: 992px) {
     .expo-gallery {
@@ -2130,7 +2358,18 @@ body {
     .expo-gallery img {
         height: 200px;
     }
+
+
 }
+
+/* Mobile & tablette (max 1024px) */
+@media (max-width: 1024px) {
+    .expo-gallery .expo-track,
+    .expo-gallery .expo-track.reverse {
+        display: none; /* masque le manège */
+    }
+}
+
 
 @media (max-width: 768px) {
     .expo-section {
@@ -2157,6 +2396,7 @@ body {
 
     .expo-btn {
         padding: 12px 28px;
+        
         font-size: 0.8rem;
     }
 }
@@ -2215,19 +2455,19 @@ body {
 }
 
 /* Media query : iPhone 17 Pro Max et plus petits (≤430px) */
-@media (max-width: 430px) {
+/*@media (max-width: 430px) {
     .nav-menu {
-        display: none; /* cacher les boutons classiques */
+        display: none; /* cacher les boutons classiques 
     }
     .nav-burger {
-        display: flex; /* afficher le burger */
+        display: flex; /* afficher le burger 
     }
     .mobile-menu.active {
         display: flex;
         opacity: 1;
         pointer-events: auto;
     }
-}
+}*/
 
 /* Burger animé en croix */
 .nav-burger.active span:nth-child(1) {
@@ -2359,6 +2599,414 @@ body {
 
 
 
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+
+.content-side {
+    margin-top: -2rem;
+    padding: 5rem 4rem;
+    background-color: #ffffff00;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.back-link {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.back-link:hover {
+    gap: 12px;
+    color: var(--color-primary-hover);
+}
+
+.back-link svg {
+    width: 18px;
+    height: 18px;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.contact-title {
+    font-size: 3rem;
+    font-weight: 200;
+    letter-spacing: 4px;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 15px;
+}
+
+.contact-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 4px;
+    background: var(--color-primary);
+    border-radius: 2px;
+}
+
+.contact-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-subtext);
+    font-weight: 300;
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.contact-methods {
+    position: relative; /* ancre les images */
+}
+
+
+.contact-method {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.8rem;
+    background: linear-gradient(135deg, #f1f1f1, #ffffff);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px #00000054;
+    border: 2px solid transparent;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.back-link {
+    display: none;
+}
+
+/* Version PC uniquement */
+@media (min-width: 1024px) {
+    .contact-methods {
+        max-width: 1450px;  /* encore plus compact */
+        margin: 0 auto;    
+    }
+
+    .contact-method {
+        width: 100%;
+        padding: 2.2rem 7.5rem; /* moins de padding */
+    }
+}
+
+
+
+.contact-method::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+    border-radius: 16px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+}
+
+.contact-method:hover::before {
+    opacity: 0.15;
+}
+
+.contact-method:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(255, 101, 40, 0.2);
+    border-color: var(--color-primary);
+}
+
+.contact-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.4s ease;
+}
+
+.contact-method:hover .contact-icon {
+    transform: rotate(10deg) scale(1.1);
+}
+
+.contact-icon svg {
+    width: 28px;
+    height: 28px;
+    fill: white;
+}
+
+.contact-details {
+    flex: 1;
+}
+
+.contact-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.contact-value {
+    font-size: 1.2rem;
+    color: var(--color-text);
+    font-weight: 400;
+}
+
+.social-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+
+.side-image {
+    display: none;
+}
+
+/* Tout ce qui n'est pas PC : cache les images */
+@media (max-width: 1023px) {
+    .side-image {
+        display: none !important;
+    }
+}
+
+/* VERSION PC uniquement */
+@media (min-width: 1024px) {
+    .side-image {
+        display: none; /* initialement caché, affiché via JS au scroll */
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .side-image img {
+        width: 320px;
+        opacity: 0.3;
+        filter: blur(0.5px);
+    }
+
+    .side-left {
+        left: -420px;
+        /* animation déclenchée via JS */
+    }
+
+    .side-right {
+        right: -420px;
+        /* animation déclenchée via JS */
+    }
+}
+
+/* Animations */
+@keyframes slideFromLeft {
+    0% { transform: translate(-120%, -50%); opacity: 0; }
+    100% { transform: translate(0, -50%); opacity: 1; }
+}
+
+@keyframes slideFromRight {
+    0% { transform: translate(120%, -50%); opacity: 0; }
+    100% { transform: translate(0, -50%); opacity: 1; }
+}
+
+
+
+
+@media 
+(-webkit-min-device-pixel-ratio: 2) and 
+(min-width: 1440px) and 
+(min-height: 800px) {
+
+    .side-image {
+        display: none; /* caché par défaut, affiché via JS */
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .side-image img {
+        width: 320px;
+        opacity: 0.3;
+        filter: blur(0.5px);
+    }
+
+    .side-left {
+        left: -420px;
+        /* animation déclenchée via JS */
+    }
+
+    .side-right {
+        right: -420px;
+        /* animation déclenchée via JS */
+    }
+}
+
+
+
+@keyframes slideFromLeft {
+    0% {
+        transform: translate(-120%, -50%);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0, -50%);
+        opacity: 1;
+    }
+}
+
+@keyframes slideFromRight {
+    0% {
+        transform: translate(120%, -50%);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0, -50%);
+        opacity: 1;
+    }
+}
+
+
+.side-image img {
+    opacity: 0.3;
+    filter: blur(0.5px);
+}
+
+
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+
+/* ===== SOCIAL SECTION – COLORS ONLY ===== */
+
+.social-section {
+    color: var(--color-text);
+}
+
+.social-title {
+    color: var(--color-text);
+}
+
+
+
+
+/* Couleur initiale des icônes */
+.social-link svg path {
+    fill: #ff5e00; /* orange par défaut */
+    transition: fill 0.3s ease;
+}
+
+/* Au survol de la bulle */
+.social-link:hover svg path {
+    fill: #ffffff; /* blanc au hover */
+}
+
+
+
+
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+
+            .content-side {
+                padding: 4rem 3rem;
+            }
+
+            .contact-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .content-side {
+                padding: 3rem 2rem;
+            }
+
+            .back-link {
+                top: 1rem;
+                left: 1rem;
+            }
+
+            .contact-title {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            .contact-subtitle {
+                font-size: 1rem;
+            }
+
+            .contact-method {
+                padding: 1.5rem;
+            }
+
+            .contact-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .contact-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .contact-value {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-title {
+                font-size: 1.6rem;
+            }
+
+            .content-side {
+                padding: 2rem 1.5rem;
+            }
+
+            .contact-method {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem 1rem;
+            }
+        }
 
 
 </style>
@@ -2373,24 +3021,26 @@ body {
         <nav class="nav-menu">
             <a href="#portfolio" class="nav-btn"><span>Portfolio</span></a>
             <a href="#expo-section" class="nav-btn"><span>Expositions</span></a>
-            <a href="#contact" class="nav-btn"><span>Démarche artistique</span></a>
-            <a href="contact.html" class="nav-btn"><span>Contact</span></a>
+            <a href="#contact" class="nav-btn"><span>Démarche</span></a>
+            <a href="#contact2" class="nav-btn"><span>Contact</span></a>
         </nav>
 
-        <!-- Burger -->
+        <!-- Burger 
         <div class="nav-burger">
             <span></span>
             <span></span>
             <span></span>
         </div>
     </div>
+-->
+
 
     <!-- Menu mobile plein écran -->
     <div class="mobile-menu">
         <a href="#portfolio">Portfolio</a>
         <a href="#expo-section">Expositions</a>
         <a href="#contact">Démarche artistique</a>
-        <a href="contact.html">Contact</a>
+        <a href="#contact2">Contact</a>
     </div>
 </header>
 
@@ -2446,7 +3096,7 @@ body {
             </div>
             <div class="artwork-content">
                 <h3 class="artwork-title">Mosaïque d’identité</h3>
-                <p class="artwork-description">Un visage fragmenté comme une cartographie intérieure.Chaque forme raconte une facette de l’identité en construction.</p>
+                <p class="artwork-description">Un visage fragmenté comme une cartographie intérieure. Chaque forme raconte une facette de l’identité en construction.</p>
             </div>
         </div>
 
@@ -2457,7 +3107,7 @@ body {
             </div>
             <div class="artwork-content">
                 <h3 class="artwork-title">Pensées infinies</h3>
-                <p class="artwork-description">Le regard s’égare entre formes et couleurs.Un flux intérieur, sans début ni fin.</p>
+                <p class="artwork-description">Le regard s’égare entre formes et couleurs. Un flux intérieur, sans début ni fin.</p>
             </div>
         </div>
 
@@ -2549,7 +3199,7 @@ body {
 
     <!-- Bouton ajouté -->
 <div class="more-btn-container fade-in">
-    <a href="https://voltaic-stool-9ef.notion.site/Toini-2ca05fc1b24580738993c3bac7f9c16b?source=copy_link" class="more-btn">La collection <span class="arrow">→</span></a>
+    <a href="https://voltaic-stool-9ef.notion.site/Toini-2ca05fc1b24580738993c3bac7f9c16b?source=copy_link" class="more-btn">La collection</span></a>
 </div>
 
 
@@ -2604,11 +3254,33 @@ body {
             Découvrez les lieux où mes œuvres prennent vie.
         </p>
 
-        <div class="expo-gallery">
-            <img src="image0.jpeg" alt="Exposition ToinePepe">
-            <img src="image1.jpeg" alt="Exposition ToinePepe">
-            <img src="image2.jpeg" alt="Exposition ToinePepe">
-        </div>
+  <!-- Mobile / Tablette -->
+<div class="expo-gallery mobile-only">
+    <img src="image0.jpeg">
+    <img src="image1.jpeg">
+    <img src="image2.jpeg">
+</div>
+
+<!-- PC uniquement -->
+<div class="expo-gallery pc-only">
+    <div class="expo-track">
+        <img src="image0.jpeg">
+        <img src="image1.jpeg">
+        <img src="image2.jpeg">
+        <img src="image0.jpeg">
+        <img src="image1.jpeg">
+        <img src="image2.jpeg">
+    </div>
+    <div class="expo-track reverse">
+        <img src="image0.jpeg">
+        <img src="image1.jpeg">
+        <img src="image2.jpeg">
+        <img src="image0.jpeg">
+        <img src="image1.jpeg">
+        <img src="image2.jpeg">
+    </div>
+</div>
+
 
         <a href="https://voltaic-stool-9ef.notion.site/Toini-2ca05fc1b24580738993c3bac7f9c16b?source=copy_link" class="expo-btn">Voir les lieux d’expositions</a>
 
@@ -2678,69 +3350,98 @@ body {
   </div>
 </div>
 
-
-
-<div class="contact-header-3">
-    <p class="contact-subtitle-3">Contact</p>
-
-    <div class="scroll-prompt-3">
-        <span></span>
-    </div>
-</div>
-
-
-
-
-
-
      </main>
-
-<!-- Premium Footer -->
-<footer class="premium-footer">
-    <div class="floating-elements">
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
-    </div>
-
-<div class="footer-content">
-    <!-- Company Info -->
-    <div class="footer-logo">
-        <img src="toini toile 2025-09-22 183908.svg" alt="ToinePepe logo">
-    </div>
-
-    <p class="footer-description">
-        Intéressé par mon travail ou envie d’échanger ? Je suis joignable juste ici..
-    </p>
-</div>
-
-<div class="social-links">
+</footer>
 
 
-    <a href="https://www.instagram.com/toinipepe/" class="social-link" title="Instagram">
+<div id="contact2" class="content-side">
+    <a  class="back-link">
         <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
         </svg>
+        Retour
     </a>
 
+    <div class="contact-header">
+        <h1 class="contact-title">Contact</h1>
+        
+        <p class="contact-subtitle">Envie d'échanger ou découvrir mon travail ?</p>
+    </div>
+
+ 
+    
+    <div class="contact-methods">
+
+    <!-- Image gauche -->
+    <div class="side-image side-left">
+        <img src="portf4.jpeg" alt="">
+    </div>
+
+    <!-- Image droite -->
+    <div class="side-image side-right">
+        <img src="portf5.jpeg" alt="">
+    </div>
 
 
-
-
-<a href="contact.html" class="phone-button" title="Contact">
-    <span class="phone-text">Contact</span>
-</a>
-
-
-
-
-</div>
-
-                </a>
+        <a href="tel:+33612935400" class="contact-method">
+            <div class="contact-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.85 21 3 13.15 3 3a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.59a1 1 0 01-.25 1.01l-2.2 2.19z"/>
+                </svg>
             </div>
+
+
+
+
+            <div class="contact-details">
+                <div class="contact-label">Téléphone</div>
+                <div class="contact-value">+33 6 12 93 54 00</div>
+            </div>
+        </a>
+        
+
+        <a href="mailto:toinipepe1@gmail.com" class="contact-method">
+            <div class="contact-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+            </div>
+            <div class="contact-details">
+                <div class="contact-label">Email</div>
+                <div class="contact-value">toinipepe1@gmail.com</div>
+            </div>
+        </a>
+    </div>
+
+
+
+    <div class="social-section">
+        <div class="social-title">Suivez-moi</div>
+        <div class="social-links">
+            <a href="https://www.instagram.com/toinipepe/" class="social-link" target="_blank" title="Instagram"> <svg viewBox="0 0 24 24"> <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/> </svg> </a>
+
+            <a href="mailto:toinipepe1@gmail.com" class="social-link" title="Email">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+            </a>
+
+            
+
+            <a href="tel:+33612935400" class="social-link" title="Téléphone">
+                <svg viewBox="0 0 24 24">
+                    <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.85 21 3 13.15 3 3a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.59a1 1 0 01-.25 1.01l-2.2 2.19z"/>
+                </svg>
+            </a>
         </div>
     </div>
-</footer>
+</div>
+
+
+
+
+
+
 
 <footer class="footer-bottom" id="footer-bottom">
     <div class="footer-bottom-content">
@@ -3023,6 +3724,7 @@ function closeFullView() {
 </script>
 
 
+
 <script>
     const modal = document.querySelector('.full-view-modal');
 const openButtons = document.querySelectorAll('.open-modal'); // tes boutons "Voir plus"
@@ -3148,9 +3850,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const contactSection = document.querySelector('.contact-section-2');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    observer.observe(contactSection);
+});
+</script>
 
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
 
+    const section = document.querySelector('.contact-methods');
+    if (!section) return;
+
+    const leftImg = section.querySelector('.side-left');
+    const rightImg = section.querySelector('.side-right');
+
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                // Affiche les images et lance l'animation
+                leftImg.style.display = 'block';
+                leftImg.style.animation = 'slideFromLeft 1.4s ease-out forwards';
+
+                rightImg.style.display = 'block';
+                rightImg.style.animation = 'slideFromRight 1.4s ease-out forwards';
+
+                // Arrête l'observation pour ne pas répéter
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 }); // 20% visible déclenche l'animation
+
+    observer.observe(section);
+});
+
+
+</script>
 
 
 
@@ -3174,7 +3921,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ],
   "jobTitle": "Artiste Peintre Plasticien",
   "description": "Artiste peintre plasticien explorant la fragmentation, l'identité et la mémoire à travers la peinture contemporaine et le collage",
-  "knowsAbout": ["Peinture", "Art Contemporain", "Collage", "Art Plastique", "Fragmentation", "Identité"],
+  "knowsAbout": ["Peinture", "Collage", "Art Plastique", "Fragmentation", "Identité"],
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Chantepie",
@@ -3207,7 +3954,7 @@ document.addEventListener('DOMContentLoaded', () => {
   "@context": "https://schema.org",
   "@type": "ImageGallery",
   "name": "Portfolio Toini",
-  "description": "Collection d'œuvres d'art contemporain par Toini",
+  "description": "Collection d'œuvres par Toini",
   "url": "https://www.toini-art.fr/#portfolio",
   "image": [
     "https://www.toini-art.fr/portf1.jpeg",
