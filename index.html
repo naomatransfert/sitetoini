@@ -801,7 +801,7 @@ body {
     background: linear-gradient(
         to top,
         rgba(255, 255, 255, 0) 0%, /* blanc en bas */
-        rgba(0, 0, 0, 0.527) 100%    /* vert en haut */
+        rgba(0, 0, 0, 0.286) 100%    /* vert en haut */
     );
     pointer-events: none; /* ne bloque pas les clics */
     z-index: 2;
@@ -2337,10 +2337,10 @@ body {
 
     @keyframes expoScroll {
         from {
-            transform: translateX(0);
+            transform: translateX(-50%);
         }
         to {
-            transform: translateX(-50%);
+            transform: translateX(0);
         }
     }
 }
@@ -3048,13 +3048,15 @@ body {
 -->
 
 
-    <!-- Menu mobile plein écran -->
+    <!-- Menu mobile plein écran 
     <div class="mobile-menu">
         <a href="#portfolio">Portfolio</a>
         <a href="#expo-section">Expositions</a>
         <a href="#contact">Démarche artistique</a>
         <a href="#contact2">Contact</a>
     </div>
+
+    -->
 </header>
 
 
@@ -3212,7 +3214,7 @@ body {
 
     <!-- Bouton ajouté -->
 <div class="more-btn-container fade-in">
-    <a href="https://voltaic-stool-9ef.notion.site/Toini-2ca05fc1b24580738993c3bac7f9c16b?source=copy_link" class="more-btn">La collection</span></a>
+    <a href="https://voltaic-stool-9ef.notion.site/Toini-2ca05fc1b24580738993c3bac7f9c16b?source=copy_link" class="more-btn">Voir la collection</span></a>
 </div>
 
 
@@ -3459,12 +3461,12 @@ body {
 <footer class="footer-bottom" id="footer-bottom">
     <div class="footer-bottom-content">
         <div class="copyright">
-            &copy; 2025 toini — Site réalisé par 
+            &copy; 2026 toini — Site réalisé par 
             <a href="https://www.instagram.com/naoma.studio" target="_blank">NaomaStudio</a>
         </div>
 
         <div class="footer-bottom-links">
-            <a href="#mentions-legales">Mentions légales</a>
+            <a href="Mentions-legales.html">Mentions légales</a>
         </div>
     </div>
 </footer>
@@ -3639,29 +3641,44 @@ rightArrow.addEventListener('click', () => {
 
 <script>
 const hero = document.querySelector('.hero');
-const images = ['cover.png', 'IMG_6349.jpg','oeuilcover.jpeg'];
+const images = ['cover.png', 'IMG_6349.jpg', 'oeuilcover.jpeg'];
 let index = 0;
 let showingBefore = true;
 
 setInterval(() => {
     index = (index + 1) % images.length;
+    const currentImage = images[index];
 
-    // Dégradé noir plus léger : subtil sur toutes les images
-    const gradient = `linear-gradient(
-        180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%)`;
+    // Dégradé par défaut
+    let gradient = `linear-gradient(
+        180deg,
+        rgba(0,0,0,0.3) 0%,
+        rgba(0,0,0,0.1) 100%
+    )`;
+
+    // 👉 ÉCLAIRCIR UNIQUEMENT IMG_6349.jpg
+    if (currentImage === 'IMG_6349.jpg') {
+        gradient = `linear-gradient(
+            180deg,
+            rgba(0,0,0,0.15) 0%,
+            rgba(0,0,0,0.05) 100%
+        )`;
+    }
 
     if (showingBefore) {
-        hero.style.setProperty('--after-bg', `${gradient}, url('${images[index]}')`);
+        hero.style.setProperty('--after-bg', `${gradient}, url('${currentImage}')`);
         hero.style.setProperty('--after-opacity', 1);
         hero.style.setProperty('--before-opacity', 0);
     } else {
-        hero.style.setProperty('--before-bg', `${gradient}, url('${images[index]}')`);
+        hero.style.setProperty('--before-bg', `${gradient}, url('${currentImage}')`);
         hero.style.setProperty('--before-opacity', 1);
         hero.style.setProperty('--after-opacity', 0);
     }
+
     showingBefore = !showingBefore;
 }, 3000);
 </script>
+
 
 <script>
 const lightbox = document.getElementById('lightbox');

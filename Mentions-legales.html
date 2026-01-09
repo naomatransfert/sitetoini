@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentions Légales</title>
+    <style>
+        :root {
+            --color-background: #ffffff;
+            --color-text: #2c2c2c;
+            --color-subtext: #666;
+            --color-primary: #ff6528;
+            --color-primary-hover: #ff8a59;
+            --color-shadow: rgba(0,0,0,0.08);
+            --color-border-light: rgba(0,0,0,0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            background: var(--color-background);
+            color: var(--color-text);
+            overflow-x: hidden;
+        }
+
+        /* Header avec bouton retour */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px var(--color-shadow);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+            border-radius: 36px;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(255, 101, 40, 0.1);
+        }
+
+        .back-btn::before {
+            content: '←';
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--color-primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 101, 40, 0.3);
+        }
+
+        .back-btn:hover::before {
+            transform: translateX(-4px);
+        }
+
+        /* Contenu principal */
+        .legal-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 140px 40px 80px;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 200;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--color-text);
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--color-primary);
+            border-radius: 2px;
+        }
+
+        .last-update {
+            text-align: center;
+            color: var(--color-subtext);
+            font-size: 0.9rem;
+            margin-bottom: 60px;
+            font-style: italic;
+        }
+
+        .legal-section {
+            margin-bottom: 50px;
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .legal-section:nth-child(2) { animation-delay: 0.1s; }
+        .legal-section:nth-child(3) { animation-delay: 0.2s; }
+        .legal-section:nth-child(4) { animation-delay: 0.3s; }
+        .legal-section:nth-child(5) { animation-delay: 0.4s; }
+        .legal-section:nth-child(6) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--color-primary);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            border-left: 4px solid var(--color-primary);
+            padding-left: 20px;
+        }
+
+        .legal-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: var(--color-text);
+        }
+
+        .legal-section strong {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .legal-section ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+
+        .legal-section li {
+            margin-bottom: 10px;
+            color: var(--color-text);
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, rgba(255, 101, 40, 0.05) 0%, rgba(255, 138, 89, 0.05) 100%);
+            border-left: 4px solid var(--color-primary);
+            padding: 20px 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        /* Footer */
+        .legal-footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(255, 101, 40, 0.03) 0%, rgba(255, 138, 89, 0.03) 100%);
+            border-top: 1px solid var(--color-border-light);
+            margin-top: 60px;
+        }
+
+        .legal-footer p {
+            color: var(--color-subtext);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 20px;
+            }
+
+            .back-btn {
+                padding: 8px 18px;
+                font-size: 0.75rem;
+            }
+
+            .legal-content {
+                padding: 120px 20px 60px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+                letter-spacing: 4px;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+                letter-spacing: 1px;
+            }
+
+            .legal-section p, .legal-section li {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1.6rem;
+                letter-spacing: 2px;
+            }
+
+            .section-title {
+                font-size: 1.1rem;
+                padding-left: 15px;
+            }
+
+            .info-box {
+                padding: 15px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header avec bouton retour -->
+<header class="header">
+    <div class="header-container">
+        <a href="javascript:history.back()" class="back-btn">
+            <span>Retour</span>
+        </a>
+    </div>
+</header>
+
+<!-- Contenu principal -->
+<main class="legal-content">
+    <h1 class="page-title">Mentions Légales</h1>
+    <p class="last-update">Dernière mise à jour : Janvier 2026</p>
+
+    <section class="legal-section">
+        <h2 class="section-title">1. Éditeur du site</h2>
+        <div class="info-box">
+            <p><strong>Nom de l'entreprise :</strong> Noa Morguen</p>
+            <p><strong>Nom commercial :</strong> Naoma Studio</p>
+            <p><strong>Statut juridique :</strong> Micro-entrepreneur</p>
+            <p><strong>Email :</strong> naoma.studio@gmail.com</p>
+            <p><strong>Téléphone :</strong> 07 83 87 43 05</p>
+            <p><strong>SIRET :</strong> 92857097700019 </p>
+        </div>
+    </section>
+
+    <section class="legal-section">
+        <h2 class="section-title">2. Hébergement</h2>
+        <p><strong>Hébergeur :</strong> GitHub Pages</p>
+        <p><strong>Site web :</strong> https://pages.github.com</p>
+    </section>
+
+    <section class="legal-section">
+        <h2 class="section-title">3. Propriété intellectuelle</h2>
+        <p>L'ensemble du contenu présent sur ce site (textes, images, graphismes, logo, structure) est protégé par le droit d'auteur.</p>
+        <p>Toute reproduction, représentation ou exploitation, totale ou partielle, sans autorisation préalable est interdite.</p>
+    </section>
+
+    <section class="legal-section">
+        <h2 class="section-title">4. Protection des données personnelles</h2>
+        <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification et de suppression des données vous concernant.</p>
+        <p>Pour toute demande, vous pouvez nous contacter à l'adresse suivante : <strong>naoma.studio@gmail.com</strong></p>
+        <div class="info-box">
+            <p><strong>Données collectées :</strong></p>
+            <ul>
+                <li>Données transmises via les formulaires de contact</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="legal-section">
+        <h2 class="section-title">5. Cookies</h2>
+        <p>Ce site peut utiliser des cookies nécessaires à son bon fonctionnement et à l'amélioration de l'expérience utilisateur.</p>
+        <p>Vous pouvez configurer votre navigateur pour refuser les cookies.</p>
+    </section>
+
+    <section class="legal-section">
+        <h2 class="section-title">6. Limitation de responsabilité</h2>
+        <p>L'éditeur ne saurait être tenu responsable des dommages directs ou indirects pouvant résulter de l'accès ou de l'utilisation du site.</p>
+    </section>
+
+    <section class="legal-section">
+        <h2 class="section-title">7. Droit applicable</h2>
+        <p>Les présentes mentions légales sont soumises au droit français.</p>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="legal-footer">
+    <p>© 2026 - Naoma Studio</p>
+</footer>
+
